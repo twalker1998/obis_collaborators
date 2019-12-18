@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 
 import { AppAuthModule } from './app-auth/app-auth.module';
 import { SharedModule } from './shared/shared.module';
+import { TestModule } from './test/test.module';
 import { jwtInterceptorProvider } from './app-auth/jwt.interceptor';
 import { errorInterceptorProvider } from './app-auth/errors.interceptor';
 
@@ -15,7 +16,8 @@ import { errorInterceptorProvider } from './app-auth/errors.interceptor';
   imports: [
     AppRoutingModule,
     SharedModule,
-    AppAuthModule
+    AppAuthModule,
+    TestModule
   ],
   providers: [jwtInterceptorProvider, errorInterceptorProvider],
   bootstrap: [AppComponent]
