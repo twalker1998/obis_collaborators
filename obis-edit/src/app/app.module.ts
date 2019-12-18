@@ -1,20 +1,23 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { AppAuthModule } from './app-auth/app-auth.module';
+import { SharedModule } from './shared/shared.module';
+import { jwtInterceptorProvider } from './app-auth/jwt.interceptor';
+import { errorInterceptorProvider } from './app-auth/errors.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    SharedModule,
+    AppAuthModule
   ],
-  providers: [],
+  providers: [jwtInterceptorProvider, errorInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
