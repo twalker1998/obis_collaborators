@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './app-auth/auth.guard';
 import { LoginComponent } from './shared/login/login.component';
 import { MainComponent } from './shared/main/main.component';
-import { TestCompComponent } from './test/components/test-comp/test-comp.component';
+import { SearchMainComponent } from './app-edit/components/search-main/search-main.component';
 
 const defaultRoute = 'collaborators/edit';
 
@@ -21,7 +21,7 @@ const routes: Routes = [
     children: [
       {
         path: 'edit',
-        component: TestCompComponent
+        component: SearchMainComponent
       }
     ]
   },

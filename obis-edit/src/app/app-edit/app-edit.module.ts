@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TestCompComponent } from './components/test-comp/test-comp.component';
 
 import { SharedModule } from '../shared/shared.module';
+import { SearchMainComponent } from './components/search-main/search-main.component';
 
 @NgModule({
-  declarations: [TestCompComponent],
+  declarations: [SearchMainComponent],
   imports: [
     CommonModule,
     SharedModule
   ],
   exports: [
-    TestCompComponent
+    SearchMainComponent
   ],
-  entryComponents: [TestCompComponent]
+  entryComponents: [SearchMainComponent]
 })
-export class TestModule { }
+export class AppEditModule { }
