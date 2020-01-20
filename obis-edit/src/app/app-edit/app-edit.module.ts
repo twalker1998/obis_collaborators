@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 
 import { SharedModule } from '../shared/shared.module';
@@ -9,7 +10,8 @@ import { SearchComponent } from './components/search/search.component';
   declarations: [EditMainComponent, SearchComponent],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    NgbModule
   ],
   exports: [
     EditMainComponent
