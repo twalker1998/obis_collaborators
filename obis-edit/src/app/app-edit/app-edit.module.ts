@@ -2,18 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SharedModule } from '../shared/shared.module';
-import { SearchMainComponent } from './components/search-main/search-main.component';
+import { EditMainComponent } from './components/edit-main/edit-main.component';
 import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
-  declarations: [SearchMainComponent, SearchComponent],
+  declarations: [EditMainComponent, SearchComponent],
   imports: [
     CommonModule,
     SharedModule
   ],
   exports: [
-    SearchMainComponent
+    EditMainComponent
   ],
-  entryComponents: [SearchMainComponent]
+  entryComponents: [EditMainComponent]
 })
 export class AppEditModule { }
