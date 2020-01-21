@@ -5,9 +5,10 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { EditMainComponent } from './components/edit-main/edit-main.component';
 import { SearchComponent } from './components/search/search.component';
+import { ResultComponent } from './components/result/result.component';
 
 @NgModule({
-  declarations: [EditMainComponent, SearchComponent],
+  declarations: [EditMainComponent, SearchComponent, ResultComponent],
   imports: [
     CommonModule,
     SharedModule,
