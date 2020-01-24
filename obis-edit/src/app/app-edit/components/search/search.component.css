@@ -1,0 +1,47 @@
+.card {
+    text-align: left;
+}
+
+a.card-link {
+    color: #548235;
+    vertical-align: middle;
+}
+
+a.card-link:hover {
+    color: #72b446;
+}
+
+.loading {
+    width: 150px;
+    height: 150px;
+}
+
+.spinner {
+    width: 25px;
+    height: 25px;
+}
+
+.no-results {
+    height: 200px;
+    width: 200px;
+}
+
+.name {
+    line-height: 5ex;
+}
+
+.badge {
+    display: inline-block;
+    width: 75px;
+    height: auto;
+    margin: auto;
+    vertical-align: middle;
+}
+
+.common {
+    width: 115px;
+}
+
+.community {
+    width: 90.09px;
+}

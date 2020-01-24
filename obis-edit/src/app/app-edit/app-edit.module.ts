@@ -1,18 +1,25 @@
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 
 import { SharedModule } from '../shared/shared.module';
-import { SearchMainComponent } from './components/search-main/search-main.component';
+import { EditMainComponent } from './components/edit-main/edit-main.component';
+import { SearchComponent } from './components/search/search.component';
+import { ResultComponent } from './components/result/result.component';
+
+import { DistributionMapComponent } from './components/distribution-map/distribution-map.component';
+import { MapComponent } from './components/map/map.component';
 
 @NgModule({
-  declarations: [SearchMainComponent],
+  declarations: [EditMainComponent, SearchComponent, ResultComponent, DistributionMapComponent, MapComponent],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    NgbModule
   ],
   exports: [
-    SearchMainComponent
+    EditMainComponent
   ],
-  entryComponents: [SearchMainComponent]
+  entryComponents: [EditMainComponent]
 })
 export class AppEditModule { }
