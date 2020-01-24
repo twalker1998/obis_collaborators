@@ -82,9 +82,9 @@ export class SearchComponent implements AfterViewInit {
       }
     });
     
-    this.searchService.query.subscribe(query => {
-      this.updateQueryValue(query);
-    });
+    // this.searchService.query.subscribe(query => {
+    //   this.updateQueryValue(query);
+    // });
   }
 
   search(query: string): void {
