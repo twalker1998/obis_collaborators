@@ -8,9 +8,10 @@ import { SearchComponent } from './components/search/search.component';
 import { ResultComponent } from './components/result/result.component';
 
 import { DistributionMapComponent } from './components/distribution-map/distribution-map.component';
+import { MapComponent } from './components/map/map.component';
 
 @NgModule({
-  declarations: [EditMainComponent, SearchComponent, ResultComponent, DistributionMapComponent],
+  declarations: [EditMainComponent, SearchComponent, ResultComponent, DistributionMapComponent, MapComponent],
   imports: [
     CommonModule,
     SharedModule,
