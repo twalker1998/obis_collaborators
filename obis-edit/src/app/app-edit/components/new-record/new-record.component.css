@@ -6,9 +6,6 @@
   float: left;
   width: 50%;
   text-align: center;
-  border: 2px solid #72b446;
-  border-radius: 10px;
-  padding: 10px;
 }
 
 .one {
@@ -25,6 +22,26 @@
   clear: both;
 }
 
-.label {
-  text-align: left;
+mat-card {
+  border: 2px solid #72b446;
+  border-radius: 10px;
+}
+
+mat-card-title {
+  color: #548235;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.alert-danger {
+  background-color: #f44336;
+}
+
+.alert {
+  padding: 20px;
+  color: white;
+  margin-bottom: 15px;
+  text-align: center;
 }
