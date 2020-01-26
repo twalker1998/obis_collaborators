@@ -1,3 +1,4 @@
+import { NewRecordComponent } from './app-edit/components/new-record/new-record.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -7,7 +8,7 @@ import { MainComponent } from './shared/main/main.component';
 import { EditMainComponent } from './app-edit/components/edit-main/edit-main.component';
 import { ResultComponent } from './app-edit/components/result/result.component';
 
-const defaultRoute = 'collaborators/edit';
+const defaultRoute = 'collaborators/main';
 
 const routes: Routes = [
   {
@@ -21,11 +22,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: 'edit',
+        path: 'main',
         component: EditMainComponent,
         children: [
           {
-            path: "result/:acode",
+            path: 'result/:acode',
             component: ResultComponent,
             outlet: 'result'
           }
