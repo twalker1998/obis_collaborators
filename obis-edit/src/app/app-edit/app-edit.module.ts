@@ -9,9 +9,10 @@ import { ResultComponent } from './components/result/result.component';
 
 import { DistributionMapComponent } from './components/distribution-map/distribution-map.component';
 import { MapComponent } from './components/map/map.component';
+import { NewRecordComponent } from './components/new-record/new-record.component';
 
 @NgModule({
-  declarations: [EditMainComponent, SearchComponent, ResultComponent, DistributionMapComponent, MapComponent],
+  declarations: [EditMainComponent, SearchComponent, ResultComponent, DistributionMapComponent, MapComponent, NewRecordComponent],
   imports: [
     CommonModule,
     SharedModule,
