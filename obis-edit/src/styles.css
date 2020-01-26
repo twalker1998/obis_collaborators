@@ -51,6 +51,10 @@ a:hover {
     padding: 10px;
 }
 
+.wider {
+  width: 90%;
+}
+
 .map {
     width: auto;
     padding: 0px;
