@@ -1,4 +1,3 @@
-import { NewRecordComponent } from './app-edit/components/new-record/new-record.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
