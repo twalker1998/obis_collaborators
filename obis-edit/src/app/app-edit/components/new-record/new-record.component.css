@@ -1,11 +1,22 @@
 .row {
-  padding: 15px;
+  margin-top: 15px;
 }
 
 .column {
   float: left;
   width: 50%;
   text-align: center;
+  border: 2px solid #72b446;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.one {
+  margin: 0px 10px 0px -10px;
+}
+
+.two {
+  margin: 0px -10px 0px 10px;
 }
 
 .row:after {
