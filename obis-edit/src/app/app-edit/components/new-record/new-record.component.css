@@ -1,3 +1,7 @@
+.row {
+  padding: 15px;
+}
+
 .column {
   float: left;
   width: 50%;
