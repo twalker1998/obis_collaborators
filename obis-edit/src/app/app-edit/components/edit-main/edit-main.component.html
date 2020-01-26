@@ -3,6 +3,9 @@
         <a class="nav-link active" id="nav-search-tab" data-toggle="pill" href="#nav-search" role="tab" aria-controls="nav-search" aria-selected="true">Search</a>
     </li>
     <li class="nav-item">
+      <a class="nav-link" id="nav-add-tab" data-toggle="pill" href="#nav-add" role="tab" aria-controls="nav-add" aria-selected="false">Add a Record</a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" id="nav-about-tab" data-toggle="pill" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">About</a>
     </li>
     <li class="nav-item">
@@ -34,6 +37,11 @@
               <router-outlet name="result"></router-outlet>
           </div>
       </div>
+      <div class="tab-pane fade" id="nav-add" role="tabpanel" aria-labelledby="nav-add-tab">
+          <div class="centered">
+              <app-new-record></app-new-record>
+          </div>
+      </div>
       <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
           <div class="centered">
               ABOUT COMING SOON
@@ -50,4 +58,3 @@
           </div>
       </div>
   </div>
-  
