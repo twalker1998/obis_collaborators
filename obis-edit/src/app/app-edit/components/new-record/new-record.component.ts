@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs/operators';
-
-export interface Option {
-  value: number;
-  viewValue: string;
-}
+import { Option } from '../../../shared/models/option';
 
 @Component({
   selector: 'app-new-record',
