@@ -141,19 +141,33 @@
     </form>
   </div>
   <div class="column two">
-    <div class="outline">
-      <div class="row">
-        <div class="column one">
-          <select size="10">
-            <option *ngFor="let synonym of this.synonyms" [value]="synonym.value">{{synonym.viewValue}}</option>
-          </select>
-        </div>
-        <div class="column two">
-          <select size="10">
-            <option *ngFor="let commonName of this.commonNames" [value]="commonName.value">{{commonName.viewValue}}</option>
-          </select>
-        </div>
-      </div>
-    </div>
+    <mat-card class="right outline one">
+      <mat-card-header>
+        <mat-card-title>Synonyms</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <select size="10">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="right outline two">
+      <mat-card-header>
+        <mat-card-title>Common Names</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <select size="10">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>
