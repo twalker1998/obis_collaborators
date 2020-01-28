@@ -10,9 +10,10 @@ import { ResultComponent } from './components/result/result.component';
 import { DistributionMapComponent } from './components/distribution-map/distribution-map.component';
 import { MapComponent } from './components/map/map.component';
 import { NewRecordComponent } from './components/new-record/new-record.component';
+import { SelectBoxComponent } from './components/select-box/select-box.component';
 
 @NgModule({
-  declarations: [EditMainComponent, SearchComponent, ResultComponent, DistributionMapComponent, MapComponent, NewRecordComponent],
+  declarations: [EditMainComponent, SearchComponent, ResultComponent, DistributionMapComponent, MapComponent, NewRecordComponent, SelectBoxComponent],
   imports: [
     CommonModule,
     SharedModule,
