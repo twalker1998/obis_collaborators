@@ -61,3 +61,12 @@ mat-form-field {
 select {
   width: 100%;
 }
+
+.select-control {
+  display: block;
+  width: 15%;
+}
+
+.select-control button {
+  width: 50%;
+}
