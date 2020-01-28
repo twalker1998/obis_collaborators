@@ -16,6 +16,7 @@ export interface Ranks {
 export class NewRecordComponent implements OnInit {
   acctaxForm: FormGroup;
   comtaxForm: FormGroup;
+  syntaxForm: FormGroup;
   showSpinner = false;
   submitted = false;
   error = '';
@@ -109,8 +110,22 @@ export class NewRecordComponent implements OnInit {
       vname: ['', Validators.required],
       primary_name: ['', Validators.required]
     });
+
+    this.syntaxForm = this.formBuilder.group({
+      acode: ['', Validators.required],
+      scode: ['', Validators.required],
+      sname: ['', Validators.required],
+      sname_author: null,
+      family: ['', Validators.required],
+      genus: ['', Validators.required],
+      species: ['', Validators.required],
+      subspecies: null,
+      variety: null,
+      tsn: null
+    });
   }
 
   get af() { return this.acctaxForm.controls; }
   get cf() { return this.comtaxForm.controls; }
+  get sf() { return this.syntaxForm.controls; }
 }
