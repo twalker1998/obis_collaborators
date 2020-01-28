@@ -19,6 +19,7 @@ export class NewRecordComponent implements OnInit {
   showSpinner = false;
   submitted = false;
   error = '';
+  acode: string;
 
   gRanks: Ranks[] = [
     {value: 0, viewValue: 'None'},
@@ -101,6 +102,12 @@ export class NewRecordComponent implements OnInit {
       fed_status: ['', Validators.required],
       st_status: ['', Validators.required],
       swap: ['', Validators.required]
+    });
+
+    this.comtaxForm = this.formBuilder.group({
+      acode: ['', Validators.required],
+      vname: ['', Validators.required],
+      primary_name: ['', Validators.required]
     });
   }
 

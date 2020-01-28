@@ -7,7 +7,7 @@
         </mat-card-header>
         <mat-card-content>
           <mat-form-field>
-            <input matInput placeholder="acode" formControlName="acode">
+            <input matInput placeholder="acode" formControlName="acode" [(ngModel)]="this.acode">
             <div *ngIf="submitted && af.acode.errors">
               <mat-error *ngIf="af.acode.errors.required">acode is required</mat-error>
             </div>
@@ -119,6 +119,34 @@
     </form>
   </div>
   <div class="column two">
-    <h4 class="label">Vernacular Information</h4>
+    <form [formGroup]="comtaxForm">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Vernacular Information</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-form-field>
+            <input matInput placeholder="acode" formControlName="acode" [(ngModel)]="this.acode">
+            <div *ngIf="submitted && cf.acode.errors">
+              <mat-error *ngIf="cf.acode.errors.required">acode is required</mat-error>
+            </div>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Vernacular Name" formControlName="vname">
+            <div *ngIf="submitted && cf.vname.errors">
+              <mat-error *ngIf="cf.vname.errors.required">Vernacular name is required</mat-error>
+            </div>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Primary Name</mat-label>
+            <mat-select>
+              <mat-option [value]="0">True</mat-option>
+              <mat-option [value]="1">False</mat-option>
+            </mat-select>
+            <mat-hint>Is this the accepted vernacular name or a synonym?</mat-hint>
+          </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+    </form>
   </div>
 </div>
