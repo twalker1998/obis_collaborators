@@ -6,6 +6,7 @@
   float: left;
   width: 50%;
   text-align: center;
+  height: auto;
 }
 
 .one {
@@ -22,10 +23,14 @@
   clear: both;
 }
 
-mat-card {
+.outline {
   border: 2px solid #72b446;
   border-radius: 10px;
   margin-bottom: 10px;
+}
+
+mat-card {
+  box-shadow: none;
 }
 
 mat-card-title {

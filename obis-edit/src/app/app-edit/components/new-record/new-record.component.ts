@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 
-export interface Ranks {
+export interface Option {
   value: number;
   viewValue: string;
 }
@@ -17,12 +17,14 @@ export class NewRecordComponent implements OnInit {
   acctaxForm: FormGroup;
   comtaxForm: FormGroup;
   syntaxForm: FormGroup;
+  synonyms: Array<Option>;
+  commonNames: Array<Option>;
   showSpinner = false;
   submitted = false;
   error = '';
   acode: string;
 
-  gRanks: Ranks[] = [
+  gRanks: Option[] = [
     {value: 0, viewValue: 'None'},
     {value: 1, viewValue: 'GX'},
     {value: 2, viewValue: 'GH'},
@@ -52,7 +54,7 @@ export class NewRecordComponent implements OnInit {
     {value: 26, viewValue: 'GNA'},
   ];
 
-  sRanks: Ranks[] = [
+  sRanks: Option[] = [
     {value: 0, viewValue: 'None'},
     {value: 1, viewValue: 'SX'},
     {value: 2, viewValue: 'SH'},
@@ -82,7 +84,7 @@ export class NewRecordComponent implements OnInit {
     {value: 26, viewValue: 'SNA'},
   ];
 
-  fedStatus: Ranks[] = [
+  fedStatus: Option[] = [
     {value: 0, viewValue: 'None'},
     {value: 1, viewValue: 'LE: Listed Endangered'},
     {value: 2, viewValue: 'LT: Listed Threatened'},
@@ -95,13 +97,13 @@ export class NewRecordComponent implements OnInit {
     {value: 9, viewValue: 'LT-SA: Threatened due to smiliarity in appearance to other listed species'}
   ];
 
-  stStatus: Ranks[] = [
+  stStatus: Option[] = [
     {value: 0, viewValue: 'None'},
     {value: 1, viewValue: 'LE: Listed Endangered'},
     {value: 2, viewValue: 'LT: Listed Threatened'},
   ];
 
-  swap: Ranks[] = [
+  swap: Option[] = [
     {value: 0, viewValue: 'None'},
     {value: 1, viewValue: 'I: Species receiving 11 to 15 points in state ranking'},
     {value: 2, viewValue: 'II: Species receiving 9 to 10 points in state ranking'},
