@@ -114,6 +114,28 @@
               <mat-error *ngIf="af.swap.errors.required">OK Swap is required</mat-error>
             </div>
           </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Full Scientific Name" formControlName="scientificname">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Subspecies Authorship" formControlName="sspscientificnameauthorship">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Variety Authorship" formControlName="varscientificnameauthorship">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Forma Authorship" formControlName="formascientificnameauthorship">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Tracked</mat-label>
+            <mat-select matInput formControlName="tracked">
+              <mat-option [value]="0">True</mat-option>
+              <mat-option [value]="1">False</mat-option>
+            </mat-select>
+            <div *ngIf="submitted && af.tracked.errors">
+              <mat-error *ngIf="af.tracked.errors.required">Tracked is required</mat-error>
+            </div>
+          </mat-form-field>
         </mat-card-content>
       </mat-card>
     </form>
@@ -139,11 +161,14 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Primary Name</mat-label>
-            <mat-select>
+            <mat-select matInput formControlName="primary_name">
               <mat-option [value]="0">True</mat-option>
               <mat-option [value]="1">False</mat-option>
             </mat-select>
             <mat-hint>Is this the accepted vernacular name or a synonym?</mat-hint>
+            <div *ngIf="submitted && cf.primary_name.errors">
+              <mat-error *ngIf="cf.primary_name.errors.required">Primary name is required</mat-error>
+            </div>
           </mat-form-field>
         </mat-card-content>
       </mat-card>
@@ -201,6 +226,18 @@
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="Taxonomic Serial Number" formControlName="tsn">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Full Scientific Name" formControlName="scientificname">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Subspecies Authorship" formControlName="sspscientificnameauthorship">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Variety Authorship" formControlName="varscientificnameauthorship">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Forma Authorship" formControlName="formascientificnameauthorship">
           </mat-form-field>
         </mat-card-content>
       </mat-card>

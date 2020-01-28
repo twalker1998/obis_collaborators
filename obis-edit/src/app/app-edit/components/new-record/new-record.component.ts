@@ -132,7 +132,12 @@ export class NewRecordComponent implements OnInit {
       tsn: null,
       fed_status: ['', Validators.required],
       st_status: ['', Validators.required],
-      swap: ['', Validators.required]
+      swap: ['', Validators.required],
+      scientificname: null,
+      sspscientificnameauthorship: null,
+      varscientificnameauthorship: null,
+      formascientificnameauthorship: null,
+      tracked: ['', Validators.required]
     });
 
     this.comtaxForm = this.formBuilder.group({
@@ -151,7 +156,11 @@ export class NewRecordComponent implements OnInit {
       species: ['', Validators.required],
       subspecies: null,
       variety: null,
-      tsn: null
+      tsn: null,
+      scientificname: null,
+      sspscientificnameauthorship: null,
+      varscientificnameauthorship: null,
+      formascientificnameauthorship: null
     });
   }
 
