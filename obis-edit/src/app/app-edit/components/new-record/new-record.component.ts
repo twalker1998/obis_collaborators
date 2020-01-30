@@ -11,8 +11,8 @@ export class NewRecordComponent implements OnInit {
   acctaxForm: FormGroup;
   comtaxForm: FormGroup;
   syntaxForm: FormGroup;
-  synonyms: Array<Option>;
-  commonNames: Array<Option>;
+  synonyms: Array<string> = new Array<string>();
+  commonNames: Array<string> = new Array<string>();
   showSpinner = false;
   submitted = false;
   error = '';
@@ -163,4 +163,12 @@ export class NewRecordComponent implements OnInit {
   get af() { return this.acctaxForm.controls; }
   get cf() { return this.comtaxForm.controls; }
   get sf() { return this.syntaxForm.controls; }
+
+  addSynonym() {
+    this.synonyms.push(this.sf.sname.value);
+  }
+
+  addCommonName() {
+    this.commonNames.push(this.cf.vname.value);
+  }
 }

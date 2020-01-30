@@ -146,19 +146,15 @@
         <mat-card-title>Synonyms</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <select size="10">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+        <select size="10" id="synonyms">
+          <option *ngFor="let synonym of this.synonyms">{{synonym}}</option>
         </select>
         <div class="select-control">
           <button type="button" data-toggle="collapse" data-target="#addSynonym" aria-expanded="false" aria-controls="addSynonym"><span>+</span></button>
           <button><span>-</span></button>
         </div>
       </mat-card-content>
-      <form [formGroup]="syntaxForm" class="collapse multi-collapse" id="addSynonym">
+      <form [formGroup]="syntaxForm" class="collapse multi-collapse" id="addSynonym" (ngSubmit)="addSynonym()">
         <mat-card class="outline">
           <button class="close" type="button" data-toggle="collapse" data-target="#addSynonym" aria-expanded="false" aria-controls="addSynonym">X</button>
           <mat-card-header>
@@ -237,19 +233,15 @@
         <mat-card-title>Common Names</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <select size="10">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+        <select size="10" id="commonNames">
+          <option *ngFor="let commonName of this.commonNames">{{commonName}}</option>
         </select>
         <div class="select-control">
           <button type="button" data-toggle="collapse" data-target="#addCommonName" aria-expanded="false" aria-controls="addCommonName"><span>+</span></button>
           <button><span>-</span></button>
         </div>
       </mat-card-content>
-      <form [formGroup]="comtaxForm" class="collapse multi-collapse" id="addCommonName">
+      <form [formGroup]="comtaxForm" class="collapse multi-collapse" id="addCommonName" (ngSubmit)="addCommonName()">
         <mat-card class="outline">
           <button class="close" type="button" data-toggle="collapse" data-target="#addCommonName" aria-expanded="false" aria-controls="addCommonName">X</button>
           <mat-card-header>
