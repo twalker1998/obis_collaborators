@@ -54,7 +54,7 @@ mat-form-field {
 
 .right {
   width: 50%;
-  display: inline-block;
+  display: inline-grid;
   text-align: left;
 }
 
