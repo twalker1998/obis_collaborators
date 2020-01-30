@@ -151,7 +151,7 @@
         </select>
         <div class="select-control">
           <button type="button" data-toggle="collapse" data-target="#addSynonym" aria-expanded="false" aria-controls="addSynonym"><span>+</span></button>
-          <button><span>-</span></button>
+          <button (click)="removeSynonym()"><span>-</span></button>
         </div>
       </mat-card-content>
       <form [formGroup]="syntaxForm" class="collapse multi-collapse" id="addSynonym" (ngSubmit)="addSynonym()">
@@ -238,7 +238,7 @@
         </select>
         <div class="select-control">
           <button type="button" data-toggle="collapse" data-target="#addCommonName" aria-expanded="false" aria-controls="addCommonName"><span>+</span></button>
-          <button><span>-</span></button>
+          <button (click)="removeCommonName()"><span>-</span></button>
         </div>
       </mat-card-content>
       <form [formGroup]="comtaxForm" class="collapse multi-collapse" id="addCommonName" (ngSubmit)="addCommonName()">

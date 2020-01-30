@@ -168,7 +168,25 @@ export class NewRecordComponent implements OnInit {
     this.synonyms.push(this.sf.sname.value);
   }
 
+  removeSynonym() {
+    const synonymsSelect = (<HTMLSelectElement>document.getElementById('synonyms'));
+    const index = this.synonyms.indexOf(synonymsSelect.value, 0);
+
+    if (index > -1) {
+      this.synonyms.splice(index, 1);
+    }
+  }
+
   addCommonName() {
     this.commonNames.push(this.cf.vname.value);
+  }
+
+  removeCommonName() {
+    const commonNamesSelect = (<HTMLSelectElement>document.getElementById('commonNames'));
+    const index = this.commonNames.indexOf(commonNamesSelect.value, 0);
+
+    if (index > -1) {
+      this.commonNames.splice(index, 1);
+    }
   }
 }
