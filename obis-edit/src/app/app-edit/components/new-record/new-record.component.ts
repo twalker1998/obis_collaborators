@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Option } from '../../../shared/models/option';
 
 @Component({
@@ -112,7 +112,7 @@ export class NewRecordComponent implements OnInit {
 
   ngOnInit() {
     this.acctaxForm = this.formBuilder.group({
-      acode: ['', Validators.required],
+      acode: ['', Validators.required, this.isAcodeUnique.bind(this)],
       sname: ['', Validators.required],
       sname_author: null,
       family: ['', Validators.required],
@@ -141,13 +141,13 @@ export class NewRecordComponent implements OnInit {
     });
 
     this.comtaxForm = this.formBuilder.group({
-      acode: ['', Validators.required],
+      acode: ['', Validators.required, this.isAcodeUnique.bind(this)],
       vname: ['', Validators.required],
       primary_name: ['', Validators.required]
     });
 
     this.syntaxForm = this.formBuilder.group({
-      acode: ['', Validators.required],
+      acode: ['', Validators.required, this.isAcodeUnique.bind(this)],
       scode: ['', Validators.required],
       sname: ['', Validators.required],
       sname_author: null,
@@ -167,6 +167,10 @@ export class NewRecordComponent implements OnInit {
   get af() { return this.acctaxForm.controls; }
   get cf() { return this.comtaxForm.controls; }
   get sf() { return this.syntaxForm.controls; }
+
+  isAcodeUnique(control: FormControl) {
+
+  }
 
   addSynonym() {
     this.syntaxFormSubmitted = true;
