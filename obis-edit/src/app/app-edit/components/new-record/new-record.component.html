@@ -8,13 +8,13 @@
         <mat-card-content>
           <mat-form-field>
             <input matInput placeholder="acode" formControlName="acode" [(ngModel)]="this.acode">
-            <div *ngIf="submitted && af.acode.errors">
+            <div *ngIf="recordSubmitted && af.acode.errors">
               <mat-error *ngIf="af.acode.errors.required">acode is required</mat-error>
             </div>
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="Scientific Name" formControlName="sname">
-            <div *ngIf="submitted && af.sname.errors">
+            <div *ngIf="recordSubmitted && af.sname.errors">
               <mat-error *ngIf="af.sname.errors.required">Scientific Name is required</mat-error>
             </div>
           </mat-form-field>
@@ -23,19 +23,19 @@
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="Family" formControlName="family">
-            <div *ngIf="submitted && af.family.errors">
+            <div *ngIf="recordSubmitted && af.family.errors">
               <mat-error *ngIf="af.family.errors.required">Family is required</mat-error>
             </div>
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="Genus" formControlName="genus">
-            <div *ngIf="submitted && af.genus.errors">
+            <div *ngIf="recordSubmitted && af.genus.errors">
               <mat-error *ngIf="af.genus.errors.required">Genus is required</mat-error>
             </div>
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="Species" formControlName="species">
-            <div *ngIf="submitted && af.species.errors">
+            <div *ngIf="recordSubmitted && af.species.errors">
               <mat-error *ngIf="af.species.errors.required">Species is required</mat-error>
             </div>
           </mat-form-field>
@@ -62,7 +62,7 @@
             <mat-select matInput formControlName="g_rank">
               <mat-option *ngFor="let gRank of this.gRanks" [value]="gRank.value">{{gRank.viewValue}}</mat-option>
             </mat-select>
-            <div *ngIf="submitted && af.g_rank.errors">
+            <div *ngIf="recordSubmitted && af.g_rank.errors">
               <mat-error *ngIf="af.g_rank.errors.required">Global Rank is required</mat-error>
             </div>
           </mat-form-field>
@@ -71,7 +71,7 @@
             <mat-select matInput formControlName="s_rank">
               <mat-option *ngFor="let sRank of this.sRanks" [value]="sRank.value">{{sRank.viewValue}}</mat-option>
             </mat-select>
-            <div *ngIf="submitted && af.s_rank.errors">
+            <div *ngIf="recordSubmitted && af.s_rank.errors">
               <mat-error *ngIf="af.s_rank.errors.required">State Rank is required</mat-error>
             </div>
           </mat-form-field>
@@ -92,7 +92,7 @@
             <mat-select matInput formControlName="fed_status">
               <mat-option *ngFor="let fedStatus of this.fedStatus" [value]="fedStatus.value">{{fedStatus.viewValue}}</mat-option>
             </mat-select>
-            <div *ngIf="submitted && af.fed_status.errors">
+            <div *ngIf="recordSubmitted && af.fed_status.errors">
               <mat-error *ngIf="af.fed_status.errors.required">Federal Status is required</mat-error>
             </div>
           </mat-form-field>
@@ -101,7 +101,7 @@
             <mat-select matInput formControlName="st_status">
               <mat-option *ngFor="let stStatus of this.stStatus" [value]="stStatus.value">{{stStatus.viewValue}}</mat-option>
             </mat-select>
-            <div *ngIf="submitted && af.st_status.errors">
+            <div *ngIf="recordSubmitted && af.st_status.errors">
               <mat-error *ngIf="af.st_status.errors.required">State Status is required</mat-error>
             </div>
           </mat-form-field>
@@ -110,7 +110,7 @@
             <mat-select matInput formControlName="swap">
               <mat-option *ngFor="let swap of this.swap" [value]="swap.value">{{swap.viewValue}}</mat-option>
             </mat-select>
-            <div *ngIf="submitted && af.swap.errors">
+            <div *ngIf="recordSubmitted && af.swap.errors">
               <mat-error *ngIf="af.swap.errors.required">OK Swap is required</mat-error>
             </div>
           </mat-form-field>
@@ -132,7 +132,7 @@
               <mat-option [value]="0">True</mat-option>
               <mat-option [value]="1">False</mat-option>
             </mat-select>
-            <div *ngIf="submitted && af.tracked.errors">
+            <div *ngIf="recordSubmitted && af.tracked.errors">
               <mat-error *ngIf="af.tracked.errors.required">Tracked is required</mat-error>
             </div>
           </mat-form-field>
@@ -163,19 +163,19 @@
           <mat-card-content>
             <mat-form-field>
               <input matInput placeholder="acode" formControlName="acode" [(ngModel)]="acode">
-              <div *ngIf="submitted && sf.acode.errors">
+              <div *ngIf="syntaxFormSubmitted && sf.acode.errors">
                 <mat-error *ngIf="sf.acode.errors.required">acode is required</mat-error>
               </div>
             </mat-form-field>
             <mat-form-field>
               <input matInput placeholder="scode" formControlName="scode">
-              <div *ngIf="submitted && sf.scode.errors">
+              <div *ngIf="syntaxFormSubmitted && sf.scode.errors">
                 <mat-error *ngIf="sf.scode.errors.required">scode is required</mat-error>
               </div>
             </mat-form-field>
             <mat-form-field>
               <input matInput placeholder="Scientific Name" formControlName="sname">
-              <div *ngIf="submitted && sf.sname.errors">
+              <div *ngIf="syntaxFormSubmitted && sf.sname.errors">
                 <mat-error *ngIf="sf.sname.errors.required">Scientific Name is required</mat-error>
               </div>
             </mat-form-field>
@@ -184,19 +184,19 @@
             </mat-form-field>
             <mat-form-field>
               <input matInput placeholder="Family" formControlName="family">
-              <div *ngIf="submitted && sf.family.errors">
+              <div *ngIf="syntaxFormSubmitted && sf.family.errors">
                 <mat-error *ngIf="sf.family.errors.required">Family is required</mat-error>
               </div>
             </mat-form-field>
             <mat-form-field>
               <input matInput placeholder="Genus" formControlName="genus">
-              <div *ngIf="submitted && sf.genus.errors">
+              <div *ngIf="syntaxFormSubmitted && sf.genus.errors">
                 <mat-error *ngIf="sf.genus.errors.required">Genus is required</mat-error>
               </div>
             </mat-form-field>
             <mat-form-field>
               <input matInput placeholder="Species" formControlName="species">
-              <div *ngIf="submitted && sf.species.errors">
+              <div *ngIf="syntaxFormSubmitted && sf.species.errors">
                 <mat-error *ngIf="sf.species.errors.required">Species is required</mat-error>
               </div>
             </mat-form-field>
@@ -250,13 +250,13 @@
           <mat-card-content>
             <mat-form-field>
               <input matInput placeholder="acode" formControlName="acode" [(ngModel)]="this.acode">
-              <div *ngIf="submitted && cf.acode.errors">
+              <div *ngIf="comtaxFormSubmitted && cf.acode.errors">
                 <mat-error *ngIf="cf.acode.errors.required">acode is required</mat-error>
               </div>
             </mat-form-field>
             <mat-form-field>
               <input matInput placeholder="Vernacular Name" formControlName="vname">
-              <div *ngIf="submitted && cf.vname.errors">
+              <div *ngIf="comtaxFormSubmitted && cf.vname.errors">
                 <mat-error *ngIf="cf.vname.errors.required">Vernacular name is required</mat-error>
               </div>
             </mat-form-field>
@@ -267,7 +267,7 @@
                 <mat-option [value]="1">False</mat-option>
               </mat-select>
               <mat-hint>Is this the accepted vernacular name or a synonym?</mat-hint>
-              <div *ngIf="submitted && cf.primary_name.errors">
+              <div *ngIf="comtaxFormSubmitted && cf.primary_name.errors">
                 <mat-error *ngIf="cf.primary_name.errors.required">Primary name is required</mat-error>
               </div>
             </mat-form-field>

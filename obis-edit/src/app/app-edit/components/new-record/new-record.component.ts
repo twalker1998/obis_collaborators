@@ -10,13 +10,15 @@ import { Option } from '../../../shared/models/option';
 export class NewRecordComponent implements OnInit {
   acctaxForm: FormGroup;
   comtaxForm: FormGroup;
+  comtaxFormSubmitted = false;
   syntaxForm: FormGroup;
+  syntaxFormSubmitted = false;
   synonyms: Array<string> = new Array<string>();
   commonNames: Array<string> = new Array<string>();
   showSpinner = false;
-  submitted = false;
   error = '';
   acode: string;
+  recordSubmitted = false;
 
   gRanks: Option[] = [
     {value: 0, viewValue: 'None'},
