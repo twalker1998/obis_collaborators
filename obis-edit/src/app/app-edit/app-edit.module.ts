@@ -11,6 +11,8 @@ import { DistributionMapComponent } from './components/distribution-map/distribu
 import { MapComponent } from './components/map/map.component';
 import { NewRecordComponent } from './components/new-record/new-record.component';
 
+import { AcodeValidator } from './validators/acode-validator';
+
 @NgModule({
   declarations: [EditMainComponent, SearchComponent, ResultComponent, DistributionMapComponent, MapComponent, NewRecordComponent],
   imports: [
@@ -21,6 +23,9 @@ import { NewRecordComponent } from './components/new-record/new-record.component
   exports: [
     EditMainComponent
   ],
-  entryComponents: [EditMainComponent]
+  entryComponents: [EditMainComponent],
+  providers: [
+    AcodeValidator
+  ]
 })
 export class AppEditModule { }
