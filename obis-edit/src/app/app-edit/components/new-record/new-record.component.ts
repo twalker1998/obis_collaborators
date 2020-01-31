@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+
+import { AcodeValidator } from './../../validators/acode-validator';
 import { Option } from '../../../shared/models/option';
+import { RecordService } from '../../core/record/record.service';
 
 @Component({
   selector: 'app-new-record',
@@ -108,11 +111,11 @@ export class NewRecordComponent implements OnInit {
     {value: 3, viewValue: 'III: Species receiving 6 to 8 points in state ranking'}
   ];
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private recordService: RecordService, private acodeValidator: AcodeValidator) { }
 
   ngOnInit() {
     this.acctaxForm = this.formBuilder.group({
-      acode: ['', Validators.required, this.isAcodeUnique.bind(this)],
+      acode: ['', Validators.required, this.acodeValidator.isAcodeUnique.bind(this.acodeValidator)],
       sname: ['', Validators.required],
       sname_author: null,
       family: ['', Validators.required],
@@ -141,13 +144,13 @@ export class NewRecordComponent implements OnInit {
     });
 
     this.comtaxForm = this.formBuilder.group({
-      acode: ['', Validators.required, this.isAcodeUnique.bind(this)],
+      acode: ['', Validators.required, this.acodeValidator.isAcodeUnique.bind(this.acodeValidator)],
       vname: ['', Validators.required],
       primary_name: ['', Validators.required]
     });
 
     this.syntaxForm = this.formBuilder.group({
-      acode: ['', Validators.required, this.isAcodeUnique.bind(this)],
+      acode: ['', Validators.required, this.acodeValidator.isAcodeUnique.bind(this.acodeValidator)],
       scode: ['', Validators.required],
       sname: ['', Validators.required],
       sname_author: null,
@@ -167,10 +170,6 @@ export class NewRecordComponent implements OnInit {
   get af() { return this.acctaxForm.controls; }
   get cf() { return this.comtaxForm.controls; }
   get sf() { return this.syntaxForm.controls; }
-
-  isAcodeUnique(control: FormControl) {
-
-  }
 
   addSynonym() {
     this.syntaxFormSubmitted = true;
