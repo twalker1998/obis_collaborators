@@ -19,6 +19,8 @@ export class NewRecordComponent implements OnInit {
   error = '';
   acode: string;
   recordSubmitted = false;
+  synonymAdded = false;
+  commonNameAdded = false;
 
   gRanks: Option[] = [
     {value: 0, viewValue: 'None'},
@@ -167,7 +169,16 @@ export class NewRecordComponent implements OnInit {
   get sf() { return this.syntaxForm.controls; }
 
   addSynonym() {
+    this.syntaxFormSubmitted = true;
+
+    if (this.syntaxForm.invalid) {
+      return;
+    }
+
     this.synonyms.push(this.sf.sname.value);
+
+    this.syntaxFormSubmitted = false;
+    this.synonymAdded = true;
   }
 
   removeSynonym() {
@@ -180,7 +191,16 @@ export class NewRecordComponent implements OnInit {
   }
 
   addCommonName() {
+    this.comtaxFormSubmitted = true;
+
+    if (this.comtaxForm.invalid) {
+      return;
+    }
+
     this.commonNames.push(this.cf.vname.value);
+
+    this.comtaxFormSubmitted = false;
+    this.commonNameAdded = true;
   }
 
   removeCommonName() {
