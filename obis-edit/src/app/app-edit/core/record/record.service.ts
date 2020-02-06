@@ -1,12 +1,16 @@
+import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { throwError, Observable } from 'rxjs';
+
+import { AuthenticationService } from './../../../app-auth/authentication.service';
+import { HightaxApi } from './../../../shared/models/api/hightax_api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecordService {
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private authenticationService: AuthenticationService) { }
 
   isAcodeUnique(acode: string) {
     return this.httpClient.get('http://obsvweb1.ou.edu/obis_search_old/check-acode.php?acode=' + acode);
@@ -14,6 +18,21 @@ export class RecordService {
 
   doesFamilyExist(family: string) {
     return this.httpClient.get('http://obsvweb1.ou.edu/obis_search_old/check-family.php?family=' + family);
+  }
+
+  createHightaxRecord(newRecord: HightaxApi): Observable<HightaxApi> {
+    const token = this.authenticationService.currentUserValue.key;
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Token ' + token,
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.httpClient.post<HightaxApi>('https://obis.ou.edu/api/obis/hightax/', JSON.stringify(newRecord), httpOptions).pipe(
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error: any) {
