@@ -12,6 +12,10 @@ export class RecordService {
     return this.httpClient.get('http://obsvweb1.ou.edu/obis_search_old/check-acode.php?acode=' + acode);
   }
 
+  doesFamilyExist(family: string) {
+    return this.httpClient.get('http://obsvweb1.ou.edu/obis_search_old/check-family.php?family=' + family);
+  }
+
   private handleError(error: any) {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred: ', error.error.message);
