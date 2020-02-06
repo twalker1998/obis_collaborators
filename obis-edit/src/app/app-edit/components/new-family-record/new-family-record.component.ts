@@ -2,14 +2,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
 
-export interface FamilyData {
-  kingdon: string;
-  phylum: string;
-  class: string;
-  order: string;
-  family: string;
-  category: string;
-}
+import { HightaxApi } from '../../../shared/models/api/hightax_api';
 
 @Component({
   selector: 'app-new-family-record',
@@ -21,7 +14,7 @@ export class NewFamilyRecordComponent implements OnInit {
   recordSubmitted = false;
 
   constructor(private formBuilder: FormBuilder, public dialogRef: MatDialogRef<NewFamilyRecordComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: FamilyData) { }
+              @Inject(MAT_DIALOG_DATA) public data: HightaxApi) { }
 
   ngOnInit(): void {
     this.familyForm = this.formBuilder.group({
