@@ -11,9 +11,10 @@
             <div *ngIf="recordSubmitted && af.acode.errors">
               <mat-error *ngIf="af.acode.errors.required">acode is required</mat-error>
             </div>
-            <mat-icon matSuffix><mat-spinner [style.display]="(acctaxForm.get('acode').status === 'PENDING') ? 'block' : 'none'" [diameter]="25"></mat-spinner></mat-icon>
+            <mat-icon matSuffix><mat-spinner [style.display]="(acctaxForm.get('acode').status === 'PENDING') ? 'block' : 'none'" [diameter]="20"></mat-spinner></mat-icon>
             <mat-icon matSuffix *ngIf="acctaxForm.get('acode').hasError('acodeInUse')" [ngStyle]="{'color': '#f44336'}">error</mat-icon>
             <mat-error id="acodeInUseError" *ngIf="acctaxForm.get('acode').hasError('acodeInUse')">acode is already in use</mat-error>
+            <mat-icon matSuffix *ngIf="acctaxForm.get('acode').valid" [ngStyle]="{'color': '#72b446'}">check</mat-icon>
           </mat-form-field>
           <div id="acodeInUseError" *ngIf="acctaxForm.get('acode').hasError('acodeInUse')"></div>
           <mat-form-field>
