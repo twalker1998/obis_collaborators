@@ -13,10 +13,10 @@
             </div>
             <mat-icon matSuffix><mat-spinner [style.display]="(acctaxForm.get('acode').status === 'PENDING') ? 'block' : 'none'" [diameter]="20"></mat-spinner></mat-icon>
             <mat-icon matSuffix *ngIf="acctaxForm.get('acode').hasError('acodeInUse')" [ngStyle]="{'color': '#f44336'}">error</mat-icon>
-            <mat-error id="acodeInUseError" *ngIf="acctaxForm.get('acode').hasError('acodeInUse')">acode is already in use</mat-error>
+            <mat-error class="errorMessageDisplay" *ngIf="acctaxForm.get('acode').hasError('acodeInUse')">acode is already in use</mat-error>
             <mat-icon matSuffix *ngIf="acctaxForm.get('acode').valid" [ngStyle]="{'color': '#72b446'}">check</mat-icon>
           </mat-form-field>
-          <div id="acodeInUseError" *ngIf="acctaxForm.get('acode').hasError('acodeInUse')"></div>
+          <div class="errorMessageDisplay" *ngIf="acctaxForm.get('acode').hasError('acodeInUse')"></div>
           <mat-form-field>
             <input matInput placeholder="Scientific Name" formControlName="sname">
             <div *ngIf="recordSubmitted && af.sname.errors">
@@ -31,7 +31,12 @@
             <div *ngIf="recordSubmitted && af.family.errors">
               <mat-error *ngIf="af.family.errors.required">Family is required</mat-error>
             </div>
+            <mat-icon matSuffix><mat-spinner [style.display]="(acctaxForm.get('family').status === 'PENDING') ? 'block' : 'none'" [diameter]="20"></mat-spinner></mat-icon>
+            <mat-icon matSuffix *ngIf="acctaxForm.get('family').hasError('nonExistingFamily')" [ngStyle]="{'color': '#f44336'}">error</mat-icon>
+            <mat-error class="errorMessageDisplay" *ngIf="acctaxForm.get('family').hasError('nonExistingFamily')">Family doesn't exist.</mat-error>
+            <mat-icon matSuffix *ngIf="acctaxForm.get('family').valid" [ngStyle]="{'color': '#72b446'}">check</mat-icon>
           </mat-form-field>
+          <div class="errorMessageDisplay" *ngIf="acctaxForm.get('family').hasError('nonExistingFamily')"></div>
           <mat-form-field>
             <input matInput placeholder="Genus" formControlName="genus">
             <div *ngIf="recordSubmitted && af.genus.errors">
