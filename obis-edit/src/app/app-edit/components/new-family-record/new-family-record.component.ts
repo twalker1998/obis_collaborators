@@ -35,6 +35,7 @@ export class NewFamilyRecordComponent implements OnInit {
 
   createRecord(): void {
     const newFamilyRecord: HightaxApi = {
+      url: null,
       kingdom: this.ff.kingdom.value,
       phylum: this.ff.phylum.value,
       taxclass: this.ff.class.value,
@@ -43,6 +44,9 @@ export class NewFamilyRecordComponent implements OnInit {
       category: this.ff.category.value
     };
 
-    this.recordService.createHightaxRecord(newFamilyRecord).subscribe(record => console.log(record));
+    // TODO: error check
+    this.recordService.createHightaxRecord(newFamilyRecord).subscribe(record => this.data = record);
+
+    this.dialogRef.close();
   }
 }
