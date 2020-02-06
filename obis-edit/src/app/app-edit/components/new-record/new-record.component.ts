@@ -115,7 +115,7 @@ export class NewRecordComponent implements OnInit {
 
   ngOnInit() {
     this.acctaxForm = this.formBuilder.group({
-      acode: ['', Validators.required, this.acodeValidator.isAcodeUnique.bind(this.acodeValidator)],
+      acode: ['', Validators.required, this.acodeValidator.validate.bind(this.acodeValidator)],
       sname: ['', Validators.required],
       sname_author: null,
       family: ['', Validators.required],
@@ -144,13 +144,13 @@ export class NewRecordComponent implements OnInit {
     });
 
     this.comtaxForm = this.formBuilder.group({
-      acode: ['', Validators.required, this.acodeValidator.isAcodeUnique.bind(this.acodeValidator)],
+      acode: ['', Validators.required, this.acodeValidator.validate.bind(this.acodeValidator)],
       vname: ['', Validators.required],
       primary_name: ['', Validators.required]
     });
 
     this.syntaxForm = this.formBuilder.group({
-      acode: ['', Validators.required, this.acodeValidator.isAcodeUnique.bind(this.acodeValidator)],
+      acode: ['', Validators.required, this.acodeValidator.validate.bind(this.acodeValidator)],
       scode: ['', Validators.required],
       sname: ['', Validators.required],
       sname_author: null,
