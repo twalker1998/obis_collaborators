@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
 
 import { HightaxApi } from '../../../shared/models/api/hightax_api';
+import { RecordService } from '../../core/record/record.service';
 
 @Component({
   selector: 'app-new-family-record',
@@ -14,7 +15,7 @@ export class NewFamilyRecordComponent implements OnInit {
   recordSubmitted = false;
 
   constructor(private formBuilder: FormBuilder, public dialogRef: MatDialogRef<NewFamilyRecordComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: HightaxApi) { }
+              @Inject(MAT_DIALOG_DATA) public data: HightaxApi, private recordService: RecordService) { }
 
   ngOnInit(): void {
     this.familyForm = this.formBuilder.group({
@@ -42,6 +43,6 @@ export class NewFamilyRecordComponent implements OnInit {
       category: this.ff.category.value
     };
 
-    console.log(JSON.stringify(newFamilyRecord));
+    this.recordService.createHightaxRecord(newFamilyRecord).subscribe(record => console.log(record));
   }
 }
