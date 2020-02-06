@@ -1,4 +1,5 @@
 export interface HightaxApi {
+  url: string;
   kingdom: string;
   phylum: string;
   taxclass: string;
