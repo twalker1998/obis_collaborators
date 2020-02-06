@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
-import { AcodeValidator } from './../../validators/acode-validator';
+import { AcodeValidator } from '../../validators/acode-validator';
+import { FamilyValidator } from '../../validators/family-validator';
 import { Option } from '../../../shared/models/option';
 import { RecordService } from '../../core/record/record.service';
 
@@ -111,14 +112,15 @@ export class NewRecordComponent implements OnInit {
     {value: 3, viewValue: 'III: Species receiving 6 to 8 points in state ranking'}
   ];
 
-  constructor(private formBuilder: FormBuilder, private recordService: RecordService, private acodeValidator: AcodeValidator) { }
+  constructor(private formBuilder: FormBuilder, private recordService: RecordService, private acodeValidator: AcodeValidator,
+              private familyValidator: FamilyValidator) { }
 
   ngOnInit() {
     this.acctaxForm = this.formBuilder.group({
       acode: ['', Validators.required, this.acodeValidator.validate.bind(this.acodeValidator)],
       sname: ['', Validators.required],
       sname_author: null,
-      family: ['', Validators.required],
+      family: ['', Validators.required, this.familyValidator.validate.bind(this.familyValidator)],
       genus: ['', Validators.required],
       species: ['', Validators.required],
       subspecies: null,
@@ -154,7 +156,7 @@ export class NewRecordComponent implements OnInit {
       scode: ['', Validators.required],
       sname: ['', Validators.required],
       sname_author: null,
-      family: ['', Validators.required],
+      family: ['', Validators.required, this.familyValidator.validate.bind(this.familyValidator)],
       genus: ['', Validators.required],
       species: ['', Validators.required],
       subspecies: null,
