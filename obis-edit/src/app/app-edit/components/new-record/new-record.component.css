@@ -41,7 +41,7 @@ mat-form-field {
   width: 100%;
 }
 
-#acodeInUseError {
+.errorMessageDisplay {
   font-size: 12pt;
   height: 18px;
 }
