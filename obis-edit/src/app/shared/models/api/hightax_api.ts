@@ -1,8 +1,8 @@
 export interface HightaxApi {
   kingdom: string;
   phylum: string;
-  class: string;
-  order: string;
+  taxclass: string;
+  taxorder: string;
   family: string;
   category: string;
 }
