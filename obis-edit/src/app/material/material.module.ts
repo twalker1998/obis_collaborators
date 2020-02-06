@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -25,7 +25,6 @@ import { MatSelectModule } from '@angular/material/select';
     MatCheckboxModule,
     MatDatepickerModule,
     MatDialogModule,
-    MatDialogRef,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -41,7 +40,6 @@ import { MatSelectModule } from '@angular/material/select';
     MatCheckboxModule,
     MatDatepickerModule,
     MatDialogModule,
-    MatDialogRef,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,

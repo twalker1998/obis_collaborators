@@ -33,7 +33,7 @@
             </div>
             <mat-icon matSuffix><mat-spinner [style.display]="(acctaxForm.get('family').status === 'PENDING') ? 'block' : 'none'" [diameter]="20"></mat-spinner></mat-icon>
             <mat-icon matSuffix *ngIf="acctaxForm.get('family').hasError('nonExistingFamily')" [ngStyle]="{'color': '#f44336'}">error</mat-icon>
-            <mat-error class="errorMessageDisplay" *ngIf="acctaxForm.get('family').hasError('nonExistingFamily')">Family doesn't exist.</mat-error>
+            <mat-error class="errorMessageDisplay" *ngIf="acctaxForm.get('family').hasError('nonExistingFamily')">Family doesn't exist. <button mat-button (click)="openDialog()">Create a new one?</button></mat-error>
             <mat-icon matSuffix *ngIf="acctaxForm.get('family').valid" [ngStyle]="{'color': '#72b446'}">check</mat-icon>
           </mat-form-field>
           <div class="errorMessageDisplay" *ngIf="acctaxForm.get('family').hasError('nonExistingFamily')"></div>

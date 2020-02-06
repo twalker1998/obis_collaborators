@@ -1,1 +1,51 @@
-<p>new-family-record works!</p>
+<div mat-dialog-content>
+  <form [formGroup]="familyForm">
+    <mat-card class="outline">
+      <mat-card-header>
+        <mat-card-title>New Family Information</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form-field>
+          <input matInput placeholder="Kingdom" formControlName="kingdom">
+          <div *ngIf="recordSubmitted && ff.kingdom.errors">
+            <mat-error *ngIf="ff.kingdom.errors.required">Kingdom is required</mat-error>
+          </div>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Phylum" formControlName="phylum">
+          <div *ngIf="recordSubmitted && ff.phylum.errors">
+            <mat-error *ngIf="ff.phylum.errors.required">Phylum is required</mat-error>
+          </div>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Class" formControlName="class">
+          <div *ngIf="recordSubmitted && ff.class.errors">
+            <mat-error *ngIf="ff.class.errors.required">Class is required</mat-error>
+          </div>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Order" formControlName="order">
+          <div *ngIf="recordSubmitted && ff.order.errors">
+            <mat-error *ngIf="ff.order.errors.required">Order is required</mat-error>
+          </div>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Family" [(ngModel)]="data.family">
+          <div *ngIf="recordSubmitted && ff.family.errors">
+            <mat-error *ngIf="ff.family.errors.required">Family is required</mat-error>
+          </div>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Category" formControlName="category">
+          <div *ngIf="recordSubmitted && ff.category.errors">
+            <mat-error *ngIf="ff.category.errors.required">Category is required</mat-error>
+          </div>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button class="btn btn-primary centered" mat-button (click)="onNoClick()">Cancel</button>
+  <button class="btn btn-primary centered" mat-button cdkFocusInitial>Create Record</button>
+</div>

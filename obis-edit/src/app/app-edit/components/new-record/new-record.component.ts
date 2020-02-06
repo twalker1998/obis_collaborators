@@ -1,3 +1,4 @@
+import { NewFamilyRecordComponent } from './../new-family-record/new-family-record.component';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
@@ -5,6 +6,7 @@ import { AcodeValidator } from '../../validators/acode-validator';
 import { FamilyValidator } from '../../validators/family-validator';
 import { Option } from '../../../shared/models/option';
 import { RecordService } from '../../core/record/record.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-new-record',
@@ -113,7 +115,7 @@ export class NewRecordComponent implements OnInit {
   ];
 
   constructor(private formBuilder: FormBuilder, private recordService: RecordService, private acodeValidator: AcodeValidator,
-              private familyValidator: FamilyValidator) { }
+              private familyValidator: FamilyValidator, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.acctaxForm = this.formBuilder.group({
@@ -213,5 +215,15 @@ export class NewRecordComponent implements OnInit {
     if (index > -1) {
       this.commonNames.splice(index, 1);
     }
+  }
+
+  openDialog(): void {
+    const familyValue = this.af.family.value;
+
+    const dialogRef = this.dialog.open(NewFamilyRecordComponent, {
+      width: 'auto',
+      height: 'auto',
+      data: {family: familyValue}
+    });
   }
 }

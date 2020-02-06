@@ -25,7 +25,7 @@ import { NewFamilyRecordComponent } from './components/new-family-record/new-fam
   exports: [
     EditMainComponent
   ],
-  entryComponents: [EditMainComponent],
+  entryComponents: [EditMainComponent, NewFamilyRecordComponent],
   providers: [
     AcodeValidator,
     FamilyValidator
