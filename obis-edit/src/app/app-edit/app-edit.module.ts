@@ -12,6 +12,7 @@ import { MapComponent } from './components/map/map.component';
 import { NewRecordComponent } from './components/new-record/new-record.component';
 
 import { AcodeValidator } from './validators/acode-validator';
+import { FamilyValidator } from './validators/family-validator';
 
 @NgModule({
   declarations: [EditMainComponent, SearchComponent, ResultComponent, DistributionMapComponent, MapComponent, NewRecordComponent],
@@ -25,7 +26,8 @@ import { AcodeValidator } from './validators/acode-validator';
   ],
   entryComponents: [EditMainComponent],
   providers: [
-    AcodeValidator
+    AcodeValidator,
+    FamilyValidator
   ]
 })
 export class AppEditModule { }
