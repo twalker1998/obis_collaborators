@@ -30,7 +30,7 @@
           </div>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Family" [(ngModel)]="data.family">
+          <input matInput placeholder="Family" [(ngModel)]="data.family" [ngModelOptions]="{standalone: true}" readonly>
           <div *ngIf="recordSubmitted && ff.family.errors">
             <mat-error *ngIf="ff.family.errors.required">Family is required</mat-error>
           </div>
@@ -47,5 +47,5 @@
 </div>
 <div mat-dialog-actions>
   <button class="btn btn-primary centered" mat-button (click)="onNoClick()">Cancel</button>
-  <button class="btn btn-primary centered" mat-button cdkFocusInitial>Create Record</button>
+  <button class="btn btn-primary centered" mat-button (click)="createRecord()">Create Record</button>
 </div>
