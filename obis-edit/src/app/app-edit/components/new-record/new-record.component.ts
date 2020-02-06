@@ -225,5 +225,9 @@ export class NewRecordComponent implements OnInit {
       height: 'auto',
       data: {family: familyValue}
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
 }
