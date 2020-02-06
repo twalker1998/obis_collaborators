@@ -7,10 +7,11 @@
         </mat-card-header>
         <mat-card-content>
           <mat-form-field>
-            <input matInput placeholder="acode" formControlName="acode" [(ngModel)]="this.acode">
+            <input matInput placeholder="acode" formControlName="acode">
             <div *ngIf="recordSubmitted && af.acode.errors">
               <mat-error *ngIf="af.acode.errors.required">acode is required</mat-error>
             </div>
+            <mat-error *ngIf="acctaxForm.get('acode').hasError('acodeInUse')">acode is already in use</mat-error>
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="Scientific Name" formControlName="sname">
@@ -162,12 +163,6 @@
           </mat-card-header>
           <mat-card-content>
             <mat-form-field>
-              <input matInput placeholder="acode" formControlName="acode" [(ngModel)]="acode">
-              <div *ngIf="syntaxFormSubmitted && sf.acode.errors">
-                <mat-error *ngIf="sf.acode.errors.required">acode is required</mat-error>
-              </div>
-            </mat-form-field>
-            <mat-form-field>
               <input matInput placeholder="scode" formControlName="scode">
               <div *ngIf="syntaxFormSubmitted && sf.scode.errors">
                 <mat-error *ngIf="sf.scode.errors.required">scode is required</mat-error>
@@ -248,12 +243,6 @@
             <mat-card-title>Vernacular Information</mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <mat-form-field>
-              <input matInput placeholder="acode" formControlName="acode" [(ngModel)]="this.acode">
-              <div *ngIf="comtaxFormSubmitted && cf.acode.errors">
-                <mat-error *ngIf="cf.acode.errors.required">acode is required</mat-error>
-              </div>
-            </mat-form-field>
             <mat-form-field>
               <input matInput placeholder="Vernacular Name" formControlName="vname">
               <div *ngIf="comtaxFormSubmitted && cf.vname.errors">
