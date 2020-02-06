@@ -37,8 +37,8 @@ export class NewFamilyRecordComponent implements OnInit {
     const newFamilyRecord: HightaxApi = {
       kingdom: this.ff.kingdom.value,
       phylum: this.ff.phylum.value,
-      class: this.ff.class.value,
-      order: this.ff.order.value,
+      taxclass: this.ff.class.value,
+      taxorder: this.ff.order.value,
       family: this.data.family,
       category: this.ff.category.value
     };
