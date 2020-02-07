@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { ApiService } from '../api/api.service';
 import { ResultsService } from '../results/results.service';
 
-import { Api_Response } from '../../../shared/models/api_response';
+import { ApiResponse } from '../../../shared/models/api-response';
 import { Acctax } from '../../../shared/models/acctax';
 import { Comtax } from '../../../shared/models/comtax';
 import { Syntax } from '../../../shared/models/syntax';
@@ -14,7 +14,7 @@ import { Hightax } from '../../../shared/models/hightax';
   providedIn: 'root'
 })
 export class SearchService {
-  private response: Api_Response;
+  private response: ApiResponse;
   private results: Array<Acctax | Comtax | Syntax> = [];
   private querySource: BehaviorSubject<string> = new BehaviorSubject<string>("");
   query = this.querySource.asObservable();
@@ -72,7 +72,7 @@ export class SearchService {
     this.response = null;
   }
 
-  async parse_response(response: Api_Response, count: number, type: string) {
+  async parse_response(response: ApiResponse, count: number, type: string) {
     var new_count = (response.count - response.results.length) - count;
     var next_url = response.next;
 

@@ -6,7 +6,7 @@ import { SearchService } from '../../core/search/search.service';
 import { ResultsService } from '../../core/results/results.service';
 import { MapService } from '../../core/map/map.service';
 
-import { Api_Response } from '../../../shared/models/api_response';
+import { ApiResponse } from '../../../shared/models/api-response';
 import { Acctax } from '../../../shared/models/acctax';
 import { Comtax } from '../../../shared/models/comtax';
 import { Syntax } from '../../../shared/models/syntax';
@@ -24,7 +24,7 @@ require('jspdf-autotable');
   styleUrls: ['./result.component.css']
 })
 export class ResultComponent implements OnInit {
-  private response: Api_Response;
+  private response: ApiResponse;
   acode: string;
   list_result: Acctax | Comtax | Syntax;
   result: Acctax;
@@ -105,7 +105,7 @@ export class ResultComponent implements OnInit {
       let base_url = result.swap.replace("http", "https");
 
       let swap_response = await this.apiService.get_url_promise(base_url + "?format=json", "swap");
-      
+
       this.swap_status = swap_response.tier;
     }
 
@@ -119,7 +119,7 @@ export class ResultComponent implements OnInit {
       let base_url = result.fed_status.replace("http", "https");
 
       let fed_status_response = await this.apiService.get_url_promise(base_url + "?format=json", "fed_status");
-      
+
       this.fed_status = fed_status_response.description;
     }
 
@@ -133,14 +133,14 @@ export class ResultComponent implements OnInit {
       let base_url = result.st_status.replace("http", "https");
 
       let st_status_response = await this.apiService.get_url_promise(base_url + "?format=json", "st_status");
-      
+
       this.st_status = st_status_response.description;
     }
 
     this.isStStatusLoaded = true;
   }
 
-  async get_vnames(response: Api_Response) {
+  async get_vnames(response: ApiResponse) {
     if(response.results.length > 1) {
       for(let r of response.results) {
         r = <Comtax>(r);
@@ -158,7 +158,7 @@ export class ResultComponent implements OnInit {
     this.areVNamesLoaded = true;
   }
 
-  async get_synonyms(response: Api_Response) {
+  async get_synonyms(response: ApiResponse) {
     for(let r of response.results) {
       r = <Syntax>(r);
 
