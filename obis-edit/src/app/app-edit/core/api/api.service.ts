@@ -7,7 +7,7 @@ import { ApiResponse } from '../../../shared/models/api-response';
 import { Acctax } from '../../../shared/models/acctax';
 import { Hightax } from '../../../shared/models/hightax';
 import { Swap } from '../../../shared/models/swap';
-import { FedStatus } from '../../../shared/models/fed_status';
+import { FedStatus } from '../../../shared/models/fed-status';
 import { StateStatus } from '../../../shared/models/st_status';
 import { OccurrenceData } from '../../../shared/models/occurrence_data';
 
