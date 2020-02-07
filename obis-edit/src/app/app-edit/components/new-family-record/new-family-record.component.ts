@@ -44,9 +44,8 @@ export class NewFamilyRecordComponent implements OnInit {
       category: this.ff.category.value
     };
 
-    // TODO: error check
-    this.recordService.createHightaxRecord(newFamilyRecord).subscribe(record => this.data = record);
-
-    this.dialogRef.close();
+    this.recordService.createHightaxRecord(newFamilyRecord).subscribe(response => {
+      this.dialogRef.close();
+    });
   }
 }
