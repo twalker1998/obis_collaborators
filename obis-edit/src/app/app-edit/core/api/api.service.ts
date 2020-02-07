@@ -9,7 +9,7 @@ import { Hightax } from '../../../shared/models/hightax';
 import { Swap } from '../../../shared/models/swap';
 import { FedStatus } from '../../../shared/models/fed-status';
 import { StateStatus } from '../../../shared/models/st_status';
-import { OccurrenceData } from '../../../shared/models/occurrence_data';
+import { OccurrenceData } from '../../../shared/models/occurrence-data';
 
 @Injectable({
   providedIn: 'root'

@@ -11,7 +11,7 @@ import { Acctax } from '../../../shared/models/acctax';
 import { Comtax } from '../../../shared/models/comtax';
 import { Syntax } from '../../../shared/models/syntax';
 import { Occurrence } from '../../../shared/models/occurrence';
-import { OccurrenceData } from '../../../shared/models/occurrence_data';
+import { OccurrenceData } from '../../../shared/models/occurrence-data';
 import { formatDate } from '@angular/common';
 
 declare const require: any;
