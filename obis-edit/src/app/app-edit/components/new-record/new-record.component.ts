@@ -187,7 +187,7 @@ export class NewRecordComponent implements OnInit {
   }
 
   removeSynonym() {
-    const synonymsSelect = (<HTMLSelectElement>document.getElementById('synonyms'));
+    const synonymsSelect = (document.getElementById('synonyms') as HTMLSelectElement);
     const index = this.synonyms.indexOf(synonymsSelect.value, 0);
 
     if (index > -1) {
@@ -209,7 +209,7 @@ export class NewRecordComponent implements OnInit {
   }
 
   removeCommonName() {
-    const commonNamesSelect = (<HTMLSelectElement>document.getElementById('commonNames'));
+    const commonNamesSelect = (document.getElementById('commonNames') as HTMLSelectElement);
     const index = this.commonNames.indexOf(commonNamesSelect.value, 0);
 
     if (index > -1) {
