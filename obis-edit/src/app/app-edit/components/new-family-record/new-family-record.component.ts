@@ -2,7 +2,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
 
-import { HightaxApi } from '../../../shared/models/api/hightax_api';
+import { HightaxApi } from '../../../shared/models/api/hightax-api';
 import { RecordService } from '../../core/record/record.service';
 
 @Component({
