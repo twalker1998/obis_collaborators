@@ -1,12 +1,13 @@
 import { NewFamilyRecordComponent } from './../new-family-record/new-family-record.component';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+
+import { Option } from '../../../shared/models/option';
 
 import { AcodeValidator } from '../../validators/acode-validator';
 import { FamilyValidator } from '../../validators/family-validator';
-import { Option } from '../../../shared/models/option';
 import { RecordService } from '../../core/record/record.service';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-new-record',
