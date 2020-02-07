@@ -218,16 +218,18 @@ export class NewRecordComponent implements OnInit {
   }
 
   openDialog(): void {
-    const familyValue = this.af.family.value;
+    const familyVal = this.af.family.value;
 
     const dialogRef = this.dialog.open(NewFamilyRecordComponent, {
       width: 'auto',
       height: 'auto',
-      data: {family: familyValue}
+      data: {family: familyVal}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      if (this.acctaxForm.get('family').hasError('nonExistingFamily')) {
+        this.acctaxForm.get('family').updateValueAndValidity();
+      }
     });
   }
 }
