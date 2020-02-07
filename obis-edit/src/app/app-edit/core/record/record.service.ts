@@ -1,7 +1,7 @@
-import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { AuthenticationService } from './../../../app-auth/authentication.service';
 import { HightaxApi } from '../../../shared/models/api/hightax-api';
