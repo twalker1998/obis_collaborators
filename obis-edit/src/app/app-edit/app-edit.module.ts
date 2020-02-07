@@ -9,9 +9,14 @@ import { ResultComponent } from './components/result/result.component';
 
 import { DistributionMapComponent } from './components/distribution-map/distribution-map.component';
 import { MapComponent } from './components/map/map.component';
+import { NewRecordComponent } from './components/new-record/new-record.component';
+
+import { AcodeValidator } from './validators/acode-validator';
+import { FamilyValidator } from './validators/family-validator';
+import { NewFamilyRecordComponent } from './components/new-family-record/new-family-record.component';
 
 @NgModule({
-  declarations: [EditMainComponent, SearchComponent, ResultComponent, DistributionMapComponent, MapComponent],
+  declarations: [EditMainComponent, SearchComponent, ResultComponent, DistributionMapComponent, MapComponent, NewRecordComponent, NewFamilyRecordComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -20,6 +25,10 @@ import { MapComponent } from './components/map/map.component';
   exports: [
     EditMainComponent
   ],
-  entryComponents: [EditMainComponent]
+  entryComponents: [EditMainComponent, NewFamilyRecordComponent],
+  providers: [
+    AcodeValidator,
+    FamilyValidator
+  ]
 })
 export class AppEditModule { }

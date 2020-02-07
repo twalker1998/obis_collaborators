@@ -1,0 +1,281 @@
+<div class="row">
+  <div class="column one">
+    <form [formGroup]="acctaxForm">
+      <mat-card class="outline">
+        <mat-card-header>
+          <mat-card-title>Taxonomic Information</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-form-field>
+            <input matInput placeholder="acode" formControlName="acode">
+            <div *ngIf="recordSubmitted && af.acode.errors">
+              <mat-error *ngIf="af.acode.errors.required">acode is required</mat-error>
+            </div>
+            <mat-icon matSuffix><mat-spinner [style.display]="(acctaxForm.get('acode').status === 'PENDING') ? 'block' : 'none'" [diameter]="20"></mat-spinner></mat-icon>
+            <mat-icon matSuffix *ngIf="acctaxForm.get('acode').hasError('acodeInUse')" [ngStyle]="{'color': '#f44336'}">error</mat-icon>
+            <mat-error class="errorMessageDisplay" *ngIf="acctaxForm.get('acode').hasError('acodeInUse')">acode is already in use</mat-error>
+            <mat-icon matSuffix *ngIf="acctaxForm.get('acode').valid" [ngStyle]="{'color': '#72b446'}">check</mat-icon>
+          </mat-form-field>
+          <div class="errorMessageDisplay" *ngIf="acctaxForm.get('acode').hasError('acodeInUse')"></div>
+          <mat-form-field>
+            <input matInput placeholder="Scientific Name" formControlName="sname">
+            <div *ngIf="recordSubmitted && af.sname.errors">
+              <mat-error *ngIf="af.sname.errors.required">Scientific Name is required</mat-error>
+            </div>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Scientific Name Authorship" formControlName="sname_author">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Family" formControlName="family">
+            <div *ngIf="recordSubmitted && af.family.errors">
+              <mat-error *ngIf="af.family.errors.required">Family is required</mat-error>
+            </div>
+            <mat-icon matSuffix><mat-spinner [style.display]="(acctaxForm.get('family').status === 'PENDING') ? 'block' : 'none'" [diameter]="20"></mat-spinner></mat-icon>
+            <mat-icon matSuffix *ngIf="acctaxForm.get('family').hasError('nonExistingFamily')" [ngStyle]="{'color': '#f44336'}">error</mat-icon>
+            <mat-error class="errorMessageDisplay" *ngIf="acctaxForm.get('family').hasError('nonExistingFamily')">Family doesn't exist. <a [routerLink]="" (click)="openDialog()">Create a new one?</a></mat-error>
+            <mat-icon matSuffix *ngIf="acctaxForm.get('family').valid" [ngStyle]="{'color': '#72b446'}">check</mat-icon>
+          </mat-form-field>
+          <div class="errorMessageDisplay" *ngIf="acctaxForm.get('family').hasError('nonExistingFamily')"></div>
+          <mat-form-field>
+            <input matInput placeholder="Genus" formControlName="genus">
+            <div *ngIf="recordSubmitted && af.genus.errors">
+              <mat-error *ngIf="af.genus.errors.required">Genus is required</mat-error>
+            </div>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Species" formControlName="species">
+            <div *ngIf="recordSubmitted && af.species.errors">
+              <mat-error *ngIf="af.species.errors.required">Species is required</mat-error>
+            </div>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Subspecies" formControlName="subspecies">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Variety" formControlName="variety">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Forma" formControlName="forma">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Element Code" formControlName="elcode">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Global Element Code" formControlName="gelcode">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="IUCN Code" formControlName="iucncode">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Global Rank</mat-label>
+            <mat-select matInput formControlName="g_rank">
+              <mat-option *ngFor="let gRank of this.gRanks" [value]="gRank.value">{{gRank.viewValue}}</mat-option>
+            </mat-select>
+            <div *ngIf="recordSubmitted && af.g_rank.errors">
+              <mat-error *ngIf="af.g_rank.errors.required">Global Rank is required</mat-error>
+            </div>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>State Rank</mat-label>
+            <mat-select matInput formControlName="s_rank">
+              <mat-option *ngFor="let sRank of this.sRanks" [value]="sRank.value">{{sRank.viewValue}}</mat-option>
+            </mat-select>
+            <div *ngIf="recordSubmitted && af.s_rank.errors">
+              <mat-error *ngIf="af.s_rank.errors.required">State Rank is required</mat-error>
+            </div>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Nativity" formControlName="nativity">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Source" formControlName="source">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="USDA Code" formControlName="usda_code">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Taxonomic Serial Number" formControlName="tsn">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Federal Status</mat-label>
+            <mat-select matInput formControlName="fed_status">
+              <mat-option *ngFor="let fedStatus of this.fedStatus" [value]="fedStatus.value">{{fedStatus.viewValue}}</mat-option>
+            </mat-select>
+            <div *ngIf="recordSubmitted && af.fed_status.errors">
+              <mat-error *ngIf="af.fed_status.errors.required">Federal Status is required</mat-error>
+            </div>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>State Status</mat-label>
+            <mat-select matInput formControlName="st_status">
+              <mat-option *ngFor="let stStatus of this.stStatus" [value]="stStatus.value">{{stStatus.viewValue}}</mat-option>
+            </mat-select>
+            <div *ngIf="recordSubmitted && af.st_status.errors">
+              <mat-error *ngIf="af.st_status.errors.required">State Status is required</mat-error>
+            </div>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>OK Swap</mat-label>
+            <mat-select matInput formControlName="swap">
+              <mat-option *ngFor="let swap of this.swap" [value]="swap.value">{{swap.viewValue}}</mat-option>
+            </mat-select>
+            <div *ngIf="recordSubmitted && af.swap.errors">
+              <mat-error *ngIf="af.swap.errors.required">OK Swap is required</mat-error>
+            </div>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Full Scientific Name" formControlName="scientificname">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Subspecies Authorship" formControlName="sspscientificnameauthorship">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Variety Authorship" formControlName="varscientificnameauthorship">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Forma Authorship" formControlName="formascientificnameauthorship">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Tracked</mat-label>
+            <mat-select matInput formControlName="tracked">
+              <mat-option [value]="0">True</mat-option>
+              <mat-option [value]="1">False</mat-option>
+            </mat-select>
+            <div *ngIf="recordSubmitted && af.tracked.errors">
+              <mat-error *ngIf="af.tracked.errors.required">Tracked is required</mat-error>
+            </div>
+          </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+    </form>
+  </div>
+  <div class="column two">
+    <mat-card class="right outline one">
+      <mat-card-header>
+        <mat-card-title>Synonyms</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <select size="10" id="synonyms">
+          <option *ngFor="let synonym of this.synonyms">{{synonym}}</option>
+        </select>
+        <div class="select-control">
+          <button type="button" data-toggle="collapse" data-target="#addSynonym" aria-expanded="false" aria-controls="addSynonym"><span>+</span></button>
+          <button (click)="removeSynonym()"><span>-</span></button>
+        </div>
+      </mat-card-content>
+      <form [formGroup]="syntaxForm" class="collapse multi-collapse" id="addSynonym" (ngSubmit)="addSynonym()">
+        <mat-card class="outline">
+          <button class="close" type="button" data-toggle="collapse" data-target="#addSynonym" aria-expanded="false" aria-controls="addSynonym">X</button>
+          <mat-card-header>
+            <mat-card-title>Synonym Information</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-form-field>
+              <input matInput placeholder="scode" formControlName="scode">
+              <div *ngIf="syntaxFormSubmitted && sf.scode.errors">
+                <mat-error *ngIf="sf.scode.errors.required">scode is required</mat-error>
+              </div>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Scientific Name" formControlName="sname">
+              <div *ngIf="syntaxFormSubmitted && sf.sname.errors">
+                <mat-error *ngIf="sf.sname.errors.required">Scientific Name is required</mat-error>
+              </div>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Scientific Name Authorship" formControlName="sname_author">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Family" formControlName="family">
+              <div *ngIf="syntaxFormSubmitted && sf.family.errors">
+                <mat-error *ngIf="sf.family.errors.required">Family is required</mat-error>
+              </div>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Genus" formControlName="genus">
+              <div *ngIf="syntaxFormSubmitted && sf.genus.errors">
+                <mat-error *ngIf="sf.genus.errors.required">Genus is required</mat-error>
+              </div>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Species" formControlName="species">
+              <div *ngIf="syntaxFormSubmitted && sf.species.errors">
+                <mat-error *ngIf="sf.species.errors.required">Species is required</mat-error>
+              </div>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Subspecies" formControlName="subspecies">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Variety" formControlName="variety">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Taxonomic Serial Number" formControlName="tsn">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Full Scientific Name" formControlName="scientificname">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Subspecies Authorship" formControlName="sspscientificnameauthorship">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Variety Authorship" formControlName="varscientificnameauthorship">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Forma Authorship" formControlName="formascientificnameauthorship">
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button type="submit" color="primary">Add Synonym</button>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </mat-card>
+    <mat-card class="right outline two">
+      <mat-card-header>
+        <mat-card-title>Common Names</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <select size="10" id="commonNames">
+          <option *ngFor="let commonName of this.commonNames">{{commonName}}</option>
+        </select>
+        <div class="select-control">
+          <button type="button" data-toggle="collapse" data-target="#addCommonName" aria-expanded="false" aria-controls="addCommonName"><span>+</span></button>
+          <button (click)="removeCommonName()"><span>-</span></button>
+        </div>
+      </mat-card-content>
+      <form [formGroup]="comtaxForm" class="collapse multi-collapse" id="addCommonName" (ngSubmit)="addCommonName()">
+        <mat-card class="outline">
+          <button class="close" type="button" data-toggle="collapse" data-target="#addCommonName" aria-expanded="false" aria-controls="addCommonName">X</button>
+          <mat-card-header>
+            <mat-card-title>Vernacular Information</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-form-field>
+              <input matInput placeholder="Vernacular Name" formControlName="vname">
+              <div *ngIf="comtaxFormSubmitted && cf.vname.errors">
+                <mat-error *ngIf="cf.vname.errors.required">Vernacular name is required</mat-error>
+              </div>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Primary Name</mat-label>
+              <mat-select matInput formControlName="primary_name">
+                <mat-option [value]="0">True</mat-option>
+                <mat-option [value]="1">False</mat-option>
+              </mat-select>
+              <mat-hint>Is this the accepted vernacular name or a synonym?</mat-hint>
+              <div *ngIf="comtaxFormSubmitted && cf.primary_name.errors">
+                <mat-error *ngIf="cf.primary_name.errors.required">Primary name is required</mat-error>
+              </div>
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button type="submit" color="primary">Add Common Name</button>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </mat-card>
+  </div>
+</div>
+<button class="btn btn-primary centered">Submit Record</button>

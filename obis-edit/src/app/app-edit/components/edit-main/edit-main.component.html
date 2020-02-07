@@ -1,6 +1,9 @@
 <ul class="nav nav-pills mb-3 justify-content-end" id="obis-search-nav" role="tablist">
     <li class="nav-item">
-        <a class="nav-link active" id="nav-search-tab" data-toggle="pill" href="#nav-search" role="tab" aria-controls="nav-search" aria-selected="true">Search</a>
+        <a class="nav-link" id="nav-search-tab" data-toggle="pill" href="#nav-search" role="tab" aria-controls="nav-search" aria-selected="false">Search</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" id="nav-add-tab" data-toggle="pill" href="#nav-add" role="tab" aria-controls="nav-add" aria-selected="true">Add a Record</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" id="nav-about-tab" data-toggle="pill" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">About</a>
@@ -27,11 +30,17 @@
     </li>
   </ul>
   <div class="tab-content" id="pills-tabContent">
-      <div class="tab-pane fade show active" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
+      <div class="tab-pane fade" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
           <div class="centered">
               <h3 class="label">oklahoma biodiversity information system</h3>
               <app-search location="main"></app-search>
               <router-outlet name="result"></router-outlet>
+          </div>
+      </div>
+      <div class="tab-pane fade show active" id="nav-add" role="tabpanel" aria-labelledby="nav-add-tab">
+          <div class="centered wider">
+              <h3 class="label">oklahoma biodiversity information system</h3>
+              <app-new-record></app-new-record>
           </div>
       </div>
       <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
@@ -50,4 +59,3 @@
           </div>
       </div>
   </div>
-  
