@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Validator, FormControl } from '@angular/forms';
+import { FormControl, Validator } from '@angular/forms';
 
 import { RecordService } from './../core/record/record.service';
 
