@@ -28,7 +28,7 @@
                     <img class="spinner" id="spinner_gif" src="assets/spinner.gif" />
                 </div>
                 <div *ngIf="areVNamesLoaded">
-                    <p><b>{{primary_vname}}</b><span *ngIf="other_vnames.length > 0">, {{other_vnames.join(", ")}}</span></p>
+                    <p><b>{{primaryVname}}</b><span *ngIf="otherVnames.length > 0">, {{otherVnames.join(", ")}}</span></p>
                 </div>
 
                 <div *ngIf="!result">
@@ -44,21 +44,21 @@
                     <img class="spinner" id="spinner_gif" src="assets/spinner.gif" />
                 </div>
                 <div *ngIf="isSwapLoaded">
-                    <p><b>Species of Greatest Conservation Need Tier: </b> {{swap_status}}</p>
+                    <p><b>Species of Greatest Conservation Need Tier: </b> {{swapStatus}}</p>
                 </div>
 
                 <div *ngIf="!isFedStatusLoaded">
                     <img class="spinner" id="spinner_gif" src="assets/spinner.gif" />
                 </div>
                 <div *ngIf="isFedStatusLoaded">
-                    <p><b>Federal Status: </b> {{fed_status}}</p>
+                    <p><b>Federal Status: </b> {{fedStatus}}</p>
                 </div>
 
                 <div *ngIf="!isStStatusLoaded">
                     <img class="spinner" id="spinner_gif" src="assets/spinner.gif" />
                 </div>
                 <div *ngIf="isStStatusLoaded">
-                    <p><b>State Status: </b> {{st_status}}</p>
+                    <p><b>State Status: </b> {{stStatus}}</p>
                 </div>
 
                 <div *ngIf="!isTaxaBuilt">
