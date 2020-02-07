@@ -41,6 +41,11 @@ mat-form-field {
   width: 100%;
 }
 
+.errorMessageDisplay {
+  font-size: 12pt;
+  height: 18px;
+}
+
 .alert-danger {
   background-color: #f44336;
 }

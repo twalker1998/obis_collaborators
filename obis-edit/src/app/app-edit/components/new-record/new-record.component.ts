@@ -1,6 +1,12 @@
+import { NewFamilyRecordComponent } from './../new-family-record/new-family-record.component';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+
+import { AcodeValidator } from '../../validators/acode-validator';
+import { FamilyValidator } from '../../validators/family-validator';
 import { Option } from '../../../shared/models/option';
+import { RecordService } from '../../core/record/record.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-new-record',
@@ -10,13 +16,17 @@ import { Option } from '../../../shared/models/option';
 export class NewRecordComponent implements OnInit {
   acctaxForm: FormGroup;
   comtaxForm: FormGroup;
+  comtaxFormSubmitted = false;
   syntaxForm: FormGroup;
+  syntaxFormSubmitted = false;
   synonyms: Array<string> = new Array<string>();
   commonNames: Array<string> = new Array<string>();
   showSpinner = false;
-  submitted = false;
   error = '';
   acode: string;
+  recordSubmitted = false;
+  synonymAdded = false;
+  commonNameAdded = false;
 
   gRanks: Option[] = [
     {value: 0, viewValue: 'None'},
@@ -104,14 +114,15 @@ export class NewRecordComponent implements OnInit {
     {value: 3, viewValue: 'III: Species receiving 6 to 8 points in state ranking'}
   ];
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private recordService: RecordService, private acodeValidator: AcodeValidator,
+              private familyValidator: FamilyValidator, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.acctaxForm = this.formBuilder.group({
-      acode: ['', Validators.required],
+      acode: ['', Validators.required, this.acodeValidator.validate.bind(this.acodeValidator)],
       sname: ['', Validators.required],
       sname_author: null,
-      family: ['', Validators.required],
+      family: ['', Validators.required, this.familyValidator.validate.bind(this.familyValidator)],
       genus: ['', Validators.required],
       species: ['', Validators.required],
       subspecies: null,
@@ -137,17 +148,15 @@ export class NewRecordComponent implements OnInit {
     });
 
     this.comtaxForm = this.formBuilder.group({
-      acode: ['', Validators.required],
       vname: ['', Validators.required],
       primary_name: ['', Validators.required]
     });
 
     this.syntaxForm = this.formBuilder.group({
-      acode: ['', Validators.required],
       scode: ['', Validators.required],
       sname: ['', Validators.required],
       sname_author: null,
-      family: ['', Validators.required],
+      family: ['', Validators.required, this.familyValidator.validate.bind(this.familyValidator)],
       genus: ['', Validators.required],
       species: ['', Validators.required],
       subspecies: null,
@@ -165,7 +174,16 @@ export class NewRecordComponent implements OnInit {
   get sf() { return this.syntaxForm.controls; }
 
   addSynonym() {
+    this.syntaxFormSubmitted = true;
+
+    if (this.syntaxForm.invalid) {
+      return;
+    }
+
     this.synonyms.push(this.sf.sname.value);
+
+    this.syntaxFormSubmitted = false;
+    this.synonymAdded = true;
   }
 
   removeSynonym() {
@@ -178,7 +196,16 @@ export class NewRecordComponent implements OnInit {
   }
 
   addCommonName() {
+    this.comtaxFormSubmitted = true;
+
+    if (this.comtaxForm.invalid) {
+      return;
+    }
+
     this.commonNames.push(this.cf.vname.value);
+
+    this.comtaxFormSubmitted = false;
+    this.commonNameAdded = true;
   }
 
   removeCommonName() {
@@ -188,5 +215,21 @@ export class NewRecordComponent implements OnInit {
     if (index > -1) {
       this.commonNames.splice(index, 1);
     }
+  }
+
+  openDialog(): void {
+    const familyVal = this.af.family.value;
+
+    const dialogRef = this.dialog.open(NewFamilyRecordComponent, {
+      width: 'auto',
+      height: 'auto',
+      data: {family: familyVal}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (this.acctaxForm.get('family').hasError('nonExistingFamily')) {
+        this.acctaxForm.get('family').updateValueAndValidity();
+      }
+    });
   }
 }
