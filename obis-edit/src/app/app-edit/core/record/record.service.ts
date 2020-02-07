@@ -25,7 +25,7 @@ export class RecordService {
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': 'Token ' + token,
+        Authorization: 'Token ' + token,
         'Content-Type': 'application/json'
       })
     };
