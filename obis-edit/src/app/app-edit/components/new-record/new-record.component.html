@@ -100,7 +100,7 @@
           <mat-form-field>
             <mat-label>Federal Status</mat-label>
             <mat-select matInput formControlName="fed_status">
-              <mat-option *ngFor="let fedStatus of this.fedStatus" [value]="fedStatus.value">{{fedStatus.viewValue}}</mat-option>
+              <mat-option *ngFor="let fedStatus of this.fedStatuses" [value]="fedStatus.value">{{fedStatus.viewValue}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.fed_status.errors">
               <mat-error *ngIf="af.fed_status.errors.required">Federal Status is required</mat-error>
@@ -109,7 +109,7 @@
           <mat-form-field>
             <mat-label>State Status</mat-label>
             <mat-select matInput formControlName="st_status">
-              <mat-option *ngFor="let stStatus of this.stStatus" [value]="stStatus.value">{{stStatus.viewValue}}</mat-option>
+              <mat-option *ngFor="let stStatus of this.stStatuses" [value]="stStatus.value">{{stStatus.viewValue}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.st_status.errors">
               <mat-error *ngIf="af.st_status.errors.required">State Status is required</mat-error>

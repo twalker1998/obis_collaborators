@@ -22,6 +22,8 @@ export class NewRecordComponent implements OnInit {
   syntaxFormSubmitted = false;
   synonyms: Array<string> = new Array<string>();
   commonNames: Array<string> = new Array<string>();
+  fedStatuses: Array<Option> = new Array<Option>();
+  stStatuses: Array<Option> = new Array<Option>();
   showSpinner = false;
   error = '';
   acode: string;
@@ -89,25 +91,6 @@ export class NewRecordComponent implements OnInit {
     {value: 26, viewValue: 'SNA'},
   ];
 
-  fedStatus: Option[] = [
-    {value: 0, viewValue: 'None'},
-    {value: 1, viewValue: 'LE: Listed Endangered'},
-    {value: 2, viewValue: 'LT: Listed Threatened'},
-    {value: 3, viewValue: 'LE-EX: Listed Endangered; Believed to be extirpated in Oklahoma'},
-    {value: 4, viewValue: 'LT-EX: Listed Threatened; Believed to be extirpated in Oklahoma'},
-    {value: 5, viewValue: 'PE: Proposed Endangered'},
-    {value: 6, viewValue: 'PT: Proposed Threatened'},
-    {value: 7, viewValue: 'C: Candidate'},
-    {value: 8, viewValue: 'LE-SA: Endangered due to smiliarity in appearance to other listed species'},
-    {value: 9, viewValue: 'LT-SA: Threatened due to smiliarity in appearance to other listed species'}
-  ];
-
-  stStatus: Option[] = [
-    {value: 0, viewValue: 'None'},
-    {value: 1, viewValue: 'LE: Listed Endangered'},
-    {value: 2, viewValue: 'LT: Listed Threatened'},
-  ];
-
   swap: Option[] = [
     {value: 0, viewValue: 'None'},
     {value: 1, viewValue: 'I: Species receiving 11 to 15 points in state ranking'},
@@ -119,6 +102,16 @@ export class NewRecordComponent implements OnInit {
               private familyValidator: FamilyValidator, public dialog: MatDialog) { }
 
   ngOnInit() {
+    this.apiService.getStatuses().subscribe(res => {
+      for (const fedStatus of res.fed_statuses) {
+        this.fedStatuses.push({value: fedStatus.id, viewValue: fedStatus.display_name});
+      }
+
+      for (const stStatus of res.st_statuses) {
+        this.stStatuses.push({value: stStatus.id, viewValue: stStatus.display_name});
+      }
+    });
+
     this.acctaxForm = this.formBuilder.group({
       acode: ['', Validators.required, this.acodeValidator.validate.bind(this.acodeValidator)],
       sname: ['', Validators.required],
