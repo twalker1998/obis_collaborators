@@ -6,8 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Option } from '../../../shared/models/option';
 
 import { AcodeValidator } from '../../validators/acode-validator';
+import { ApiService } from '../../core/api.service';
 import { FamilyValidator } from '../../validators/family-validator';
-import { RecordService } from '../../core/record.service';
 
 @Component({
   selector: 'app-new-record',
@@ -115,7 +115,7 @@ export class NewRecordComponent implements OnInit {
     {value: 3, viewValue: 'III: Species receiving 6 to 8 points in state ranking'}
   ];
 
-  constructor(private formBuilder: FormBuilder, private recordService: RecordService, private acodeValidator: AcodeValidator,
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private acodeValidator: AcodeValidator,
               private familyValidator: FamilyValidator, public dialog: MatDialog) { }
 
   ngOnInit() {
