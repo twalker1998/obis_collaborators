@@ -12,7 +12,7 @@ import { Syntax } from '../../../shared/models/syntax';
 import { ApiService } from '../../core/api.service';
 import { MapService } from '../../core/map.service';
 import { ResultsService } from '../../core/results.service';
-import { SearchService } from '../../core/search/search.service';
+import { SearchService } from '../../core/search.service';
 
 declare const require: any;
 const jsPDF = require('jspdf');

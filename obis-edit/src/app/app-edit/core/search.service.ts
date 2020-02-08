@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { Acctax } from '../../../shared/models/acctax';
-import { ApiResponse } from '../../../shared/models/api-response';
-import { Comtax } from '../../../shared/models/comtax';
-import { Hightax } from '../../../shared/models/hightax';
-import { Syntax } from '../../../shared/models/syntax';
+import { Acctax } from '../../shared/models/acctax';
+import { ApiResponse } from '../../shared/models/api-response';
+import { Comtax } from '../../shared/models/comtax';
+import { Hightax } from '../../shared/models/hightax';
+import { Syntax } from '../../shared/models/syntax';
 
-import { ApiService } from '../api.service';
-import { ResultsService } from '../results.service';
+import { ApiService } from './api.service';
+import { ResultsService } from './results.service';
 
 @Injectable({
   providedIn: 'root'

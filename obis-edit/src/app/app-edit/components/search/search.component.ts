@@ -7,7 +7,7 @@ import { Syntax } from '../../../shared/models/syntax';
 
 import { MapService } from '../../core/map.service';
 import { ResultsService } from '../../core/results.service';
-import { SearchService } from '../../core/search/search.service';
+import { SearchService } from '../../core/search.service';
 
 @Component({
   selector: 'app-search',
