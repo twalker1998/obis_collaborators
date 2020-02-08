@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { throwError, Observable } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
 import { Acctax } from '../../shared/models/acctax';
 import { ApiResponse } from '../../shared/models/api-response';
 import { FedStatus } from '../../shared/models/fed-status';
 import { Hightax } from '../../shared/models/hightax';
+import { HightaxApi } from '../../shared/models/api/hightax-api';
 import { OccurrenceData } from '../../shared/models/occurrence-data';
 import { StateStatus } from '../../shared/models/st-status';
 import { Swap } from '../../shared/models/swap';
+
+import { AuthenticationService } from './../../app-auth/authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +20,7 @@ import { Swap } from '../../shared/models/swap';
 export class ApiService {
   baseUrl = 'https://obis.ou.edu/api/obis/';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private authenticationService: AuthenticationService) { }
 
   get_url(url: string, type: string): any {
     if (type === 'api_response') {
@@ -94,7 +97,7 @@ export class ApiService {
     ).toPromise();
   }
 
-  handleError(error: HttpErrorResponse) {
+  private handleError(error: any) {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred: ', error.error.message);
       return throwError('Something bad happened, please try again later.');
@@ -106,5 +109,28 @@ export class ApiService {
 
   get_occurrence_data(sname: string) {
     return this.httpClient.get<OccurrenceData>('http://obsvweb1.ou.edu/obis_search_old/occurrence-table.php?sname=' + sname);
+  }
+
+  isAcodeUnique(acode: string) {
+    return this.httpClient.get('http://obsvweb1.ou.edu/obis_search_old/check-acode.php?acode=' + acode);
+  }
+
+  doesFamilyExist(family: string) {
+    return this.httpClient.get('http://obsvweb1.ou.edu/obis_search_old/check-family.php?family=' + family);
+  }
+
+  createHightaxRecord(newRecord: HightaxApi): Observable<HightaxApi> {
+    const token = this.authenticationService.currentUserValue.key;
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Token ' + token,
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.httpClient.post<HightaxApi>('https://obis.ou.edu/api/obis/hightax/', JSON.stringify(newRecord), httpOptions).pipe(
+      catchError(this.handleError)
+    );
   }
 }
