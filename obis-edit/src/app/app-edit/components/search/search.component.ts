@@ -6,7 +6,7 @@ import { Comtax } from '../../../shared/models/comtax';
 import { Syntax } from '../../../shared/models/syntax';
 
 import { MapService } from '../../core/map.service';
-import { ResultsService } from '../../core/results/results.service';
+import { ResultsService } from '../../core/results.service';
 import { SearchService } from '../../core/search/search.service';
 
 @Component({

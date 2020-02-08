@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { Acctax } from '../../../shared/models/acctax';
-import { Comtax } from '../../../shared/models/comtax';
-import { Syntax } from '../../../shared/models/syntax';
+import { Acctax } from '../../shared/models/acctax';
+import { Comtax } from '../../shared/models/comtax';
+import { Syntax } from '../../shared/models/syntax';
 
 @Injectable({
   providedIn: 'root'

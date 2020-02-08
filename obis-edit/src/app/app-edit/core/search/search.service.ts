@@ -8,7 +8,7 @@ import { Hightax } from '../../../shared/models/hightax';
 import { Syntax } from '../../../shared/models/syntax';
 
 import { ApiService } from '../api.service';
-import { ResultsService } from '../results/results.service';
+import { ResultsService } from '../results.service';
 
 @Injectable({
   providedIn: 'root'
