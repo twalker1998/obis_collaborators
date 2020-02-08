@@ -98,17 +98,17 @@ export class NewRecordComponent implements OnInit {
   ngOnInit() {
     this.apiService.getStatuses().subscribe(res => {
       for (const fedStatus of res.fed_statuses) {
-        this.fedStatuses.push({value: fedStatus.id, viewValue: fedStatus.display_name});
+        this.fedStatuses.push({id: fedStatus.id, display_name: fedStatus.display_name});
       }
 
       for (const stStatus of res.st_statuses) {
-        this.stStatuses.push({value: stStatus.id, viewValue: stStatus.display_name});
+        this.stStatuses.push({id: stStatus.id, display_name: stStatus.display_name});
       }
     });
 
     this.apiService.getSwaps().subscribe(res => {
       for (const okSwap of res.ok_swap) {
-        this.swaps.push({value: okSwap.id, viewValue: okSwap.display_name});
+        this.swaps.push({id: okSwap.id, display_name: okSwap.display_name});
       }
     });
 

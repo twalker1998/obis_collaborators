@@ -70,7 +70,7 @@
           <mat-form-field>
             <mat-label>Global Rank</mat-label>
             <mat-select matInput formControlName="g_rank">
-              <mat-option *ngFor="let gRank of this.gRanks" [value]="gRank.value">{{gRank.viewValue}}</mat-option>
+              <mat-option *ngFor="let gRank of this.gRanks" [value]="gRank.id">{{gRank.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.g_rank.errors">
               <mat-error *ngIf="af.g_rank.errors.required">Global Rank is required</mat-error>
@@ -79,7 +79,7 @@
           <mat-form-field>
             <mat-label>State Rank</mat-label>
             <mat-select matInput formControlName="s_rank">
-              <mat-option *ngFor="let sRank of this.sRanks" [value]="sRank.value">{{sRank.viewValue}}</mat-option>
+              <mat-option *ngFor="let sRank of this.sRanks" [value]="sRank.id">{{sRank.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.s_rank.errors">
               <mat-error *ngIf="af.s_rank.errors.required">State Rank is required</mat-error>
@@ -100,7 +100,7 @@
           <mat-form-field>
             <mat-label>Federal Status</mat-label>
             <mat-select matInput formControlName="fed_status">
-              <mat-option *ngFor="let fedStatus of this.fedStatuses" [value]="fedStatus.value">{{fedStatus.viewValue}}</mat-option>
+              <mat-option *ngFor="let fedStatus of this.fedStatuses" [value]="fedStatus.id">{{fedStatus.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.fed_status.errors">
               <mat-error *ngIf="af.fed_status.errors.required">Federal Status is required</mat-error>
@@ -109,7 +109,7 @@
           <mat-form-field>
             <mat-label>State Status</mat-label>
             <mat-select matInput formControlName="st_status">
-              <mat-option *ngFor="let stStatus of this.stStatuses" [value]="stStatus.value">{{stStatus.viewValue}}</mat-option>
+              <mat-option *ngFor="let stStatus of this.stStatuses" [value]="stStatus.id">{{stStatus.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.st_status.errors">
               <mat-error *ngIf="af.st_status.errors.required">State Status is required</mat-error>
@@ -118,7 +118,7 @@
           <mat-form-field>
             <mat-label>OK Swap</mat-label>
             <mat-select matInput formControlName="swap">
-              <mat-option *ngFor="let swap of this.swaps" [value]="swap.value">{{swap.viewValue}}</mat-option>
+              <mat-option *ngFor="let swap of this.swaps" [value]="swap.id">{{swap.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.swap.errors">
               <mat-error *ngIf="af.swap.errors.required">OK Swap is required</mat-error>
