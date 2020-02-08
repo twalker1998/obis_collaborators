@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { HightaxApi } from '../../../shared/models/api/hightax-api';
+import { HightaxApi } from '../../../shared/models/php/hightax-api';
 
 import { ApiService } from '../../core/api.service';
 

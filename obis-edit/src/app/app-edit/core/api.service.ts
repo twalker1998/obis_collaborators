@@ -7,7 +7,7 @@ import { Acctax } from '../../shared/models/acctax';
 import { ApiResponse } from '../../shared/models/api-response';
 import { FedStatus } from '../../shared/models/fed-status';
 import { Hightax } from '../../shared/models/hightax';
-import { HightaxApi } from '../../shared/models/api/hightax-api';
+import { HightaxApi } from '../../shared/models/php/hightax-api';
 import { OccurrenceData } from '../../shared/models/occurrence-data';
 import { StateStatus } from '../../shared/models/st-status';
 import { Statuses } from '../../shared/models/statuses';
