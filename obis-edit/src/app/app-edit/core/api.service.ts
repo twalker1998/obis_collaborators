@@ -10,6 +10,7 @@ import { Hightax } from '../../shared/models/hightax';
 import { HightaxApi } from '../../shared/models/api/hightax-api';
 import { OccurrenceData } from '../../shared/models/occurrence-data';
 import { StateStatus } from '../../shared/models/st-status';
+import { Statuses } from '../../shared/models/statuses';
 import { Swap } from '../../shared/models/swap';
 
 import { AuthenticationService } from './../../app-auth/authentication.service';
@@ -132,5 +133,9 @@ export class ApiService {
     return this.httpClient.post<HightaxApi>('https://obis.ou.edu/api/obis/hightax/', JSON.stringify(newRecord), httpOptions).pipe(
       catchError(this.handleError)
     );
+  }
+
+  getStatuses() {
+    return this.httpClient.get<Statuses>('http://obsvweb1.ou.edu/obis_db_scripts/statuses.php');
   }
 }
