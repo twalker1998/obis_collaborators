@@ -9,6 +9,7 @@ import { FedStatus } from '../../shared/models/fed-status';
 import { Hightax } from '../../shared/models/hightax';
 import { HightaxApi } from '../../shared/models/php/hightax-api';
 import { OccurrenceData } from '../../shared/models/occurrence-data';
+import { OkSwap } from '../../shared/models/php/ok-swap';
 import { StateStatus } from '../../shared/models/st-status';
 import { Statuses } from '../../shared/models/php/statuses';
 import { Swap } from '../../shared/models/swap';
@@ -137,5 +138,9 @@ export class ApiService {
 
   getStatuses() {
     return this.httpClient.get<Statuses>('http://obsvweb1.ou.edu/obis_db_scripts/statuses.php');
+  }
+
+  getSwaps() {
+    return this.httpClient.get<OkSwap>('http://obsvweb1.ou.edu/obis_db_scripts/swap.php');
   }
 }
