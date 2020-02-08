@@ -7,7 +7,7 @@ import { Comtax } from '../../../shared/models/comtax';
 import { Hightax } from '../../../shared/models/hightax';
 import { Syntax } from '../../../shared/models/syntax';
 
-import { ApiService } from '../api/api.service';
+import { ApiService } from '../api.service';
 import { ResultsService } from '../results/results.service';
 
 @Injectable({
