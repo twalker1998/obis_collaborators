@@ -10,7 +10,7 @@ import { Hightax } from '../../shared/models/hightax';
 import { HightaxApi } from '../../shared/models/php/hightax-api';
 import { OccurrenceData } from '../../shared/models/occurrence-data';
 import { StateStatus } from '../../shared/models/st-status';
-import { Statuses } from '../../shared/models/statuses';
+import { Statuses } from '../../shared/models/php/statuses';
 import { Swap } from '../../shared/models/swap';
 
 import { AuthenticationService } from './../../app-auth/authentication.service';
