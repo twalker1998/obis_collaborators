@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { AuthenticationService } from './../../../app-auth/authentication.service';
-import { HightaxApi } from '../../../shared/models/api/hightax-api';
+import { AuthenticationService } from '../../app-auth/authentication.service';
+import { HightaxApi } from '../../shared/models/api/hightax-api';
 
 @Injectable({
   providedIn: 'root'

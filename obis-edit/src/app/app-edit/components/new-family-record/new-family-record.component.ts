@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { HightaxApi } from '../../../shared/models/api/hightax-api';
-import { RecordService } from '../../core/record/record.service';
+import { RecordService } from '../../core/record.service';
 
 @Component({
   selector: 'app-new-family-record',

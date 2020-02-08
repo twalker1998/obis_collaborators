@@ -7,7 +7,7 @@ import { Option } from '../../../shared/models/option';
 
 import { AcodeValidator } from '../../validators/acode-validator';
 import { FamilyValidator } from '../../validators/family-validator';
-import { RecordService } from '../../core/record/record.service';
+import { RecordService } from '../../core/record.service';
 
 @Component({
   selector: 'app-new-record',
