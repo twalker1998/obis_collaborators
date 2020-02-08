@@ -10,7 +10,7 @@ import { OccurrenceData } from '../../../shared/models/occurrence-data';
 import { Syntax } from '../../../shared/models/syntax';
 
 import { ApiService } from '../../core/api.service';
-import { MapService } from '../../core/map/map.service';
+import { MapService } from '../../core/map.service';
 import { ResultsService } from '../../core/results/results.service';
 import { SearchService } from '../../core/search/search.service';
 
