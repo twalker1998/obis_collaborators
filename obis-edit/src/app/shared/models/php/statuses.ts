@@ -1,7 +1,6 @@
-import { FedStatus } from './fed-status';
-import { StateStatus } from './st-status';
+import { Option } from './option';
 
 export interface Statuses {
-  fed_statuses: Array<FedStatus>;
-  st_statuses: Array<StateStatus>;
+  fed_statuses: Array<Option>;
+  st_statuses: Array<Option>;
 }

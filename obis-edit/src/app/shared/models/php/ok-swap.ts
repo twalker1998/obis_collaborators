@@ -1,5 +1,5 @@
-import { Swap } from './swap';
+import { Option } from './option';
 
 export interface OkSwap {
-  ok_swap: Array<Swap>;
+  ok_swap: Array<Option>;
 }
