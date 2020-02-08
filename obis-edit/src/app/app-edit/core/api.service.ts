@@ -108,15 +108,15 @@ export class ApiService {
   }
 
   get_occurrence_data(sname: string) {
-    return this.httpClient.get<OccurrenceData>('http://obsvweb1.ou.edu/obis_search_old/occurrence-table.php?sname=' + sname);
+    return this.httpClient.get<OccurrenceData>('http://obsvweb1.ou.edu/obis_db_scripts/occurrence-table.php?sname=' + sname);
   }
 
   isAcodeUnique(acode: string) {
-    return this.httpClient.get('http://obsvweb1.ou.edu/obis_search_old/check-acode.php?acode=' + acode);
+    return this.httpClient.get('http://obsvweb1.ou.edu/obis_db_scripts/check-acode.php?acode=' + acode);
   }
 
   doesFamilyExist(family: string) {
-    return this.httpClient.get('http://obsvweb1.ou.edu/obis_search_old/check-family.php?family=' + family);
+    return this.httpClient.get('http://obsvweb1.ou.edu/obis_db_scripts/check-family.php?family=' + family);
   }
 
   createHightaxRecord(newRecord: HightaxApi): Observable<HightaxApi> {
