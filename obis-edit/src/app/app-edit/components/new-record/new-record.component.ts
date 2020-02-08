@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 
-import { Option } from '../../../shared/models/option';
+import { Option } from '../../../shared/models/php/option';
 
 import { AcodeValidator } from '../../validators/acode-validator';
 import { ApiService } from '../../core/api.service';
