@@ -118,7 +118,7 @@
           <mat-form-field>
             <mat-label>OK Swap</mat-label>
             <mat-select matInput formControlName="swap">
-              <mat-option *ngFor="let swap of this.swap" [value]="swap.value">{{swap.viewValue}}</mat-option>
+              <mat-option *ngFor="let swap of this.swaps" [value]="swap.value">{{swap.viewValue}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.swap.errors">
               <mat-error *ngIf="af.swap.errors.required">OK Swap is required</mat-error>

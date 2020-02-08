@@ -24,6 +24,7 @@ export class NewRecordComponent implements OnInit {
   commonNames: Array<string> = new Array<string>();
   fedStatuses: Array<Option> = new Array<Option>();
   stStatuses: Array<Option> = new Array<Option>();
+  swaps: Array<Option> = new Array<Option>();
   showSpinner = false;
   error = '';
   acode: string;
@@ -91,13 +92,6 @@ export class NewRecordComponent implements OnInit {
     {value: 26, viewValue: 'SNA'},
   ];
 
-  swap: Option[] = [
-    {value: 0, viewValue: 'None'},
-    {value: 1, viewValue: 'I: Species receiving 11 to 15 points in state ranking'},
-    {value: 2, viewValue: 'II: Species receiving 9 to 10 points in state ranking'},
-    {value: 3, viewValue: 'III: Species receiving 6 to 8 points in state ranking'}
-  ];
-
   constructor(private formBuilder: FormBuilder, private apiService: ApiService, private acodeValidator: AcodeValidator,
               private familyValidator: FamilyValidator, public dialog: MatDialog) { }
 
@@ -109,6 +103,12 @@ export class NewRecordComponent implements OnInit {
 
       for (const stStatus of res.st_statuses) {
         this.stStatuses.push({value: stStatus.id, viewValue: stStatus.display_name});
+      }
+    });
+
+    this.apiService.getSwaps().subscribe(res => {
+      for (const okSwap of res.ok_swap) {
+        this.swaps.push({value: okSwap.id, viewValue: okSwap.display_name});
       }
     });
 
