@@ -7,6 +7,7 @@ import { Option } from '../../../shared/models/php/option';
 
 import { AcodeValidator } from '../../validators/acode-validator';
 import { ApiService } from '../../core/api.service';
+import { DbService } from '../../core/db.service';
 import { FamilyValidator } from '../../validators/family-validator';
 
 @Component({
@@ -15,100 +16,68 @@ import { FamilyValidator } from '../../validators/family-validator';
   styleUrls: ['./new-record.component.css']
 })
 export class NewRecordComponent implements OnInit {
+  acode: string;
   acctaxForm: FormGroup;
   comtaxForm: FormGroup;
   comtaxFormSubmitted = false;
   syntaxForm: FormGroup;
   syntaxFormSubmitted = false;
-  synonyms: Array<string> = new Array<string>();
-  commonNames: Array<string> = new Array<string>();
-  fedStatuses: Array<Option> = new Array<Option>();
-  stStatuses: Array<Option> = new Array<Option>();
-  swaps: Array<Option> = new Array<Option>();
+  recordSubmitted = false;
   showSpinner = false;
   error = '';
-  acode: string;
-  recordSubmitted = false;
+
+  synonyms: Array<string> = new Array<string>();
   synonymAdded = false;
+  commonNames: Array<string> = new Array<string>();
   commonNameAdded = false;
 
-  gRanks: Option[] = [
-    {value: 0, viewValue: 'None'},
-    {value: 1, viewValue: 'GX'},
-    {value: 2, viewValue: 'GH'},
-    {value: 3, viewValue: 'G1'},
-    {value: 4, viewValue: 'G2'},
-    {value: 5, viewValue: 'G3'},
-    {value: 6, viewValue: 'G4'},
-    {value: 7, viewValue: 'G5'},
-    {value: 8, viewValue: 'G?'},
-    {value: 9, viewValue: 'G1G1'},
-    {value: 10, viewValue: 'G1G2'},
-    {value: 11, viewValue: 'G1G3'},
-    {value: 12, viewValue: 'G1G4'},
-    {value: 13, viewValue: 'G1G5'},
-    {value: 14, viewValue: 'G2G2'},
-    {value: 15, viewValue: 'G2G3'},
-    {value: 16, viewValue: 'G2G4'},
-    {value: 17, viewValue: 'G2G5'},
-    {value: 18, viewValue: 'G3G3'},
-    {value: 19, viewValue: 'G3G4'},
-    {value: 20, viewValue: 'G3G5'},
-    {value: 21, viewValue: 'G4G4'},
-    {value: 22, viewValue: 'G4G5'},
-    {value: 23, viewValue: 'G5G5'},
-    {value: 24, viewValue: 'GU'},
-    {value: 25, viewValue: 'GNR'},
-    {value: 26, viewValue: 'GNA'},
-  ];
+  iucnCodes: Array<Option> = new Array<Option>();
+  nativities: Array<Option> = new Array<Option>();
+  swaps: Array<Option> = new Array<Option>();
+  glRanks: Array<Option> = new Array<Option>();
+  stRanks: Array<Option> = new Array<Option>();
+  fedStatuses: Array<Option> = new Array<Option>();
+  stStatuses: Array<Option> = new Array<Option>();
 
-  sRanks: Option[] = [
-    {value: 0, viewValue: 'None'},
-    {value: 1, viewValue: 'SX'},
-    {value: 2, viewValue: 'SH'},
-    {value: 3, viewValue: 'S1'},
-    {value: 4, viewValue: 'S2'},
-    {value: 5, viewValue: 'S3'},
-    {value: 6, viewValue: 'S4'},
-    {value: 7, viewValue: 'S5'},
-    {value: 8, viewValue: 'S?'},
-    {value: 9, viewValue: 'S1S1'},
-    {value: 10, viewValue: 'S1S2'},
-    {value: 11, viewValue: 'S1S3'},
-    {value: 12, viewValue: 'S1S4'},
-    {value: 13, viewValue: 'S1S5'},
-    {value: 14, viewValue: 'S2S2'},
-    {value: 15, viewValue: 'S2S3'},
-    {value: 16, viewValue: 'S2S4'},
-    {value: 17, viewValue: 'S2S5'},
-    {value: 18, viewValue: 'S3S3'},
-    {value: 19, viewValue: 'S3S4'},
-    {value: 20, viewValue: 'S3S5'},
-    {value: 21, viewValue: 'S4S4'},
-    {value: 22, viewValue: 'S4S5'},
-    {value: 23, viewValue: 'S5S5'},
-    {value: 24, viewValue: 'SU'},
-    {value: 25, viewValue: 'SNR'},
-    {value: 26, viewValue: 'SNA'},
-  ];
-
-  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private acodeValidator: AcodeValidator,
-              private familyValidator: FamilyValidator, public dialog: MatDialog) { }
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private dbService: DbService,
+              private acodeValidator: AcodeValidator, private familyValidator: FamilyValidator, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.apiService.getStatuses().subscribe(res => {
+    this.dbService.getIUCNCodes().subscribe(res => {
+      for (const IUCNCode of res.iucn_codes) {
+        this.iucnCodes.push({id: IUCNCode.id, display_name: IUCNCode.display_name});
+      }
+    });
+
+    this.dbService.getNativities().subscribe(res => {
+      for (const nativity of res.nativities) {
+        this.nativities.push({id: nativity.id, display_name: nativity.display_name});
+      }
+    });
+
+    this.dbService.getSwaps().subscribe(res => {
+      for (const okSwap of res.ok_swap) {
+        this.swaps.push({id: okSwap.id, display_name: okSwap.display_name});
+      }
+    });
+
+    this.dbService.getRanks().subscribe(res => {
+      for (const glRank of res.gl_ranks) {
+        this.glRanks.push({id: glRank.id, display_name: glRank.display_name});
+      }
+
+      for (const stRank of res.st_ranks) {
+        this.stRanks.push({id: stRank.id, display_name: stRank.display_name});
+      }
+    });
+
+    this.dbService.getStatuses().subscribe(res => {
       for (const fedStatus of res.fed_statuses) {
         this.fedStatuses.push({id: fedStatus.id, display_name: fedStatus.display_name});
       }
 
       for (const stStatus of res.st_statuses) {
         this.stStatuses.push({id: stStatus.id, display_name: stStatus.display_name});
-      }
-    });
-
-    this.apiService.getSwaps().subscribe(res => {
-      for (const okSwap of res.ok_swap) {
-        this.swaps.push({id: okSwap.id, display_name: okSwap.display_name});
       }
     });
 
