@@ -1,12 +1,13 @@
-import { NewFamilyRecordComponent } from './../new-family-record/new-family-record.component';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+
+import { NewFamilyRecordComponent } from '../new-family-record/new-family-record.component';
+import { Option } from '../../../shared/models/php/option';
 
 import { AcodeValidator } from '../../validators/acode-validator';
+import { DbService } from '../../core/db.service';
 import { FamilyValidator } from '../../validators/family-validator';
-import { Option } from '../../../shared/models/option';
-import { RecordService } from '../../core/record/record.service';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-new-record',
@@ -14,110 +15,55 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./new-record.component.css']
 })
 export class NewRecordComponent implements OnInit {
+  acode: string;
   acctaxForm: FormGroup;
   comtaxForm: FormGroup;
   comtaxFormSubmitted = false;
   syntaxForm: FormGroup;
   syntaxFormSubmitted = false;
-  synonyms: Array<string> = new Array<string>();
-  commonNames: Array<string> = new Array<string>();
+  recordSubmitted = false;
   showSpinner = false;
   error = '';
-  acode: string;
-  recordSubmitted = false;
+
+  synonyms: Array<string> = new Array<string>();
   synonymAdded = false;
+  commonNames: Array<string> = new Array<string>();
   commonNameAdded = false;
 
-  gRanks: Option[] = [
-    {value: 0, viewValue: 'None'},
-    {value: 1, viewValue: 'GX'},
-    {value: 2, viewValue: 'GH'},
-    {value: 3, viewValue: 'G1'},
-    {value: 4, viewValue: 'G2'},
-    {value: 5, viewValue: 'G3'},
-    {value: 6, viewValue: 'G4'},
-    {value: 7, viewValue: 'G5'},
-    {value: 8, viewValue: 'G?'},
-    {value: 9, viewValue: 'G1G1'},
-    {value: 10, viewValue: 'G1G2'},
-    {value: 11, viewValue: 'G1G3'},
-    {value: 12, viewValue: 'G1G4'},
-    {value: 13, viewValue: 'G1G5'},
-    {value: 14, viewValue: 'G2G2'},
-    {value: 15, viewValue: 'G2G3'},
-    {value: 16, viewValue: 'G2G4'},
-    {value: 17, viewValue: 'G2G5'},
-    {value: 18, viewValue: 'G3G3'},
-    {value: 19, viewValue: 'G3G4'},
-    {value: 20, viewValue: 'G3G5'},
-    {value: 21, viewValue: 'G4G4'},
-    {value: 22, viewValue: 'G4G5'},
-    {value: 23, viewValue: 'G5G5'},
-    {value: 24, viewValue: 'GU'},
-    {value: 25, viewValue: 'GNR'},
-    {value: 26, viewValue: 'GNA'},
-  ];
+  iucnCodes: Array<Option> = new Array<Option>();
+  nativities: Array<Option> = new Array<Option>();
+  swaps: Array<Option> = new Array<Option>();
+  glRanks: Array<Option> = new Array<Option>();
+  stRanks: Array<Option> = new Array<Option>();
+  fedStatuses: Array<Option> = new Array<Option>();
+  stStatuses: Array<Option> = new Array<Option>();
 
-  sRanks: Option[] = [
-    {value: 0, viewValue: 'None'},
-    {value: 1, viewValue: 'SX'},
-    {value: 2, viewValue: 'SH'},
-    {value: 3, viewValue: 'S1'},
-    {value: 4, viewValue: 'S2'},
-    {value: 5, viewValue: 'S3'},
-    {value: 6, viewValue: 'S4'},
-    {value: 7, viewValue: 'S5'},
-    {value: 8, viewValue: 'S?'},
-    {value: 9, viewValue: 'S1S1'},
-    {value: 10, viewValue: 'S1S2'},
-    {value: 11, viewValue: 'S1S3'},
-    {value: 12, viewValue: 'S1S4'},
-    {value: 13, viewValue: 'S1S5'},
-    {value: 14, viewValue: 'S2S2'},
-    {value: 15, viewValue: 'S2S3'},
-    {value: 16, viewValue: 'S2S4'},
-    {value: 17, viewValue: 'S2S5'},
-    {value: 18, viewValue: 'S3S3'},
-    {value: 19, viewValue: 'S3S4'},
-    {value: 20, viewValue: 'S3S5'},
-    {value: 21, viewValue: 'S4S4'},
-    {value: 22, viewValue: 'S4S5'},
-    {value: 23, viewValue: 'S5S5'},
-    {value: 24, viewValue: 'SU'},
-    {value: 25, viewValue: 'SNR'},
-    {value: 26, viewValue: 'SNA'},
-  ];
-
-  fedStatus: Option[] = [
-    {value: 0, viewValue: 'None'},
-    {value: 1, viewValue: 'LE: Listed Endangered'},
-    {value: 2, viewValue: 'LT: Listed Threatened'},
-    {value: 3, viewValue: 'LE-EX: Listed Endangered; Believed to be extirpated in Oklahoma'},
-    {value: 4, viewValue: 'LT-EX: Listed Threatened; Believed to be extirpated in Oklahoma'},
-    {value: 5, viewValue: 'PE: Proposed Endangered'},
-    {value: 6, viewValue: 'PT: Proposed Threatened'},
-    {value: 7, viewValue: 'C: Candidate'},
-    {value: 8, viewValue: 'LE-SA: Endangered due to smiliarity in appearance to other listed species'},
-    {value: 9, viewValue: 'LT-SA: Threatened due to smiliarity in appearance to other listed species'}
-  ];
-
-  stStatus: Option[] = [
-    {value: 0, viewValue: 'None'},
-    {value: 1, viewValue: 'LE: Listed Endangered'},
-    {value: 2, viewValue: 'LT: Listed Threatened'},
-  ];
-
-  swap: Option[] = [
-    {value: 0, viewValue: 'None'},
-    {value: 1, viewValue: 'I: Species receiving 11 to 15 points in state ranking'},
-    {value: 2, viewValue: 'II: Species receiving 9 to 10 points in state ranking'},
-    {value: 3, viewValue: 'III: Species receiving 6 to 8 points in state ranking'}
-  ];
-
-  constructor(private formBuilder: FormBuilder, private recordService: RecordService, private acodeValidator: AcodeValidator,
-              private familyValidator: FamilyValidator, public dialog: MatDialog) { }
+  constructor(private formBuilder: FormBuilder, private dbService: DbService,
+              private acodeValidator: AcodeValidator, private familyValidator: FamilyValidator, public dialog: MatDialog) { }
 
   ngOnInit() {
+    this.dbService.getIUCNCodes().subscribe(res => {
+      this.iucnCodes = res.iucn_codes;
+    });
+
+    this.dbService.getNativities().subscribe(res => {
+      this.nativities = res.nativities;
+    });
+
+    this.dbService.getSwaps().subscribe(res => {
+      this.swaps = res.ok_swap;
+    });
+
+    this.dbService.getRanks().subscribe(res => {
+      this.glRanks = res.gl_ranks;
+      this.stRanks = res.st_ranks;
+    });
+
+    this.dbService.getStatuses().subscribe(res => {
+      this.fedStatuses = res.fed_statuses;
+      this.stStatuses = res.st_statuses;
+    });
+
     this.acctaxForm = this.formBuilder.group({
       acode: ['', Validators.required, this.acodeValidator.validate.bind(this.acodeValidator)],
       sname: ['', Validators.required],
@@ -130,10 +76,10 @@ export class NewRecordComponent implements OnInit {
       forma: null,
       elcode: null,
       gelcode: null,
-      iucncode: null,
+      iucncode: ['', Validators.required],
       g_rank: ['', Validators.required],
       s_rank: ['', Validators.required],
-      nativity: null,
+      nativity: ['', Validators.required],
       source: null,
       usda_code: null,
       tsn: null,
@@ -187,7 +133,7 @@ export class NewRecordComponent implements OnInit {
   }
 
   removeSynonym() {
-    const synonymsSelect = (<HTMLSelectElement>document.getElementById('synonyms'));
+    const synonymsSelect = (document.getElementById('synonyms') as HTMLSelectElement);
     const index = this.synonyms.indexOf(synonymsSelect.value, 0);
 
     if (index > -1) {
@@ -209,7 +155,7 @@ export class NewRecordComponent implements OnInit {
   }
 
   removeCommonName() {
-    const commonNamesSelect = (<HTMLSelectElement>document.getElementById('commonNames'));
+    const commonNamesSelect = (document.getElementById('commonNames') as HTMLSelectElement);
     const index = this.commonNames.indexOf(commonNamesSelect.value, 0);
 
     if (index > -1) {

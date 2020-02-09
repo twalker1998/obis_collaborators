@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   error = '';
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router,
+              private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
 
     this.authenticationService.logout();
 
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams[`returnUrl`] || '/';
   }
 
   get f() { return this.loginForm.controls; }
@@ -35,7 +36,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    if(this.loginForm.invalid) {
+    if (this.loginForm.invalid) {
       return;
     }
 

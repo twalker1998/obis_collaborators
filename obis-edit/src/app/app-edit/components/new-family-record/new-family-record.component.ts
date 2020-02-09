@@ -1,9 +1,10 @@
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { HightaxApi } from '../../../shared/models/api/hightax_api';
-import { RecordService } from '../../core/record/record.service';
+import { HightaxApi } from '../../../shared/models/php/hightax-api';
+
+import { ApiService } from '../../core/api.service';
 
 @Component({
   selector: 'app-new-family-record',
@@ -15,7 +16,7 @@ export class NewFamilyRecordComponent implements OnInit {
   recordSubmitted = false;
 
   constructor(private formBuilder: FormBuilder, public dialogRef: MatDialogRef<NewFamilyRecordComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: HightaxApi, private recordService: RecordService) { }
+              @Inject(MAT_DIALOG_DATA) public data: HightaxApi, private apiService: ApiService) { }
 
   ngOnInit(): void {
     this.familyForm = this.formBuilder.group({
@@ -44,7 +45,7 @@ export class NewFamilyRecordComponent implements OnInit {
       category: this.ff.category.value
     };
 
-    this.recordService.createHightaxRecord(newFamilyRecord).subscribe(response => {
+    this.apiService.createHightaxRecord(newFamilyRecord).subscribe(response => {
       this.dialogRef.close();
     });
   }

@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Validator, FormControl } from '@angular/forms';
+import { FormControl, Validator } from '@angular/forms';
 
-import { RecordService } from './../core/record/record.service';
+import { DbService } from '../core/db.service';
 
 @Injectable()
 export class FamilyValidator implements Validator {
   debouncer: any;
 
-  constructor(private recordService: RecordService) {}
+  constructor(private dbService: DbService) {}
 
   validate(control: FormControl): any {
     clearTimeout(this.debouncer);
 
     return new Promise(resolve => {
       this.debouncer = setTimeout(() => {
-        this.recordService.doesFamilyExist(control.value).subscribe((res) => {
+        this.dbService.doesFamilyExist(control.value).subscribe((res) => {
           resolve(null);
         }, (err) => {
           resolve({nonExistingFamily: true});
