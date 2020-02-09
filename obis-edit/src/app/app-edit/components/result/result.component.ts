@@ -10,6 +10,7 @@ import { OccurrenceData } from '../../../shared/models/occurrence-data';
 import { Syntax } from '../../../shared/models/syntax';
 
 import { ApiService } from '../../core/api.service';
+import { DbService } from '../../core/db.service';
 import { MapService } from '../../core/map.service';
 import { ResultsService } from '../../core/results.service';
 import { SearchService } from '../../core/search.service';
@@ -44,8 +45,8 @@ export class ResultComponent implements OnInit {
   isStStatusLoaded = false;
   isTaxaBuilt = false;
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService, private searchService: SearchService,
-              private resultsService: ResultsService, private mapService: MapService) { }
+  constructor(private route: ActivatedRoute, private apiService: ApiService, private dbService: DbService,
+              private searchService: SearchService, private resultsService: ResultsService, private mapService: MapService) { }
 
   ngOnInit() {
     this.resultsService.isQueryComplete.next(false);
@@ -199,7 +200,7 @@ export class ResultComponent implements OnInit {
   }
 
   async get_occurrences() {
-    this.apiService.get_occurrence_data(this.result.sname).subscribe((data: OccurrenceData) => {
+    this.dbService.getOccurrenceData(this.result.sname).subscribe((data: OccurrenceData) => {
       for (const record of data.table) {
         let isDate = true;
 
