@@ -6,7 +6,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Option } from '../../../shared/models/php/option';
 
 import { AcodeValidator } from '../../validators/acode-validator';
-import { ApiService } from '../../core/api.service';
 import { DbService } from '../../core/db.service';
 import { FamilyValidator } from '../../validators/family-validator';
 
@@ -39,7 +38,7 @@ export class NewRecordComponent implements OnInit {
   fedStatuses: Array<Option> = new Array<Option>();
   stStatuses: Array<Option> = new Array<Option>();
 
-  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private dbService: DbService,
+  constructor(private formBuilder: FormBuilder, private dbService: DbService,
               private acodeValidator: AcodeValidator, private familyValidator: FamilyValidator, public dialog: MatDialog) { }
 
   ngOnInit() {
