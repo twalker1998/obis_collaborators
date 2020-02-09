@@ -1,8 +1,8 @@
-import { NewFamilyRecordComponent } from './../new-family-record/new-family-record.component';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 
+import { NewFamilyRecordComponent } from '../new-family-record/new-family-record.component';
 import { Option } from '../../../shared/models/php/option';
 
 import { AcodeValidator } from '../../validators/acode-validator';
