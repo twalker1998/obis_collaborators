@@ -8,10 +8,7 @@ import { ApiResponse } from '../../shared/models/api-response';
 import { FedStatus } from '../../shared/models/fed-status';
 import { Hightax } from '../../shared/models/hightax';
 import { HightaxApi } from '../../shared/models/php/hightax-api';
-import { OccurrenceData } from '../../shared/models/occurrence-data';
-import { OkSwap } from '../../shared/models/php/ok-swap';
 import { StateStatus } from '../../shared/models/st-status';
-import { Statuses } from '../../shared/models/php/statuses';
 import { Swap } from '../../shared/models/swap';
 
 import { AuthenticationService } from './../../app-auth/authentication.service';
@@ -109,18 +106,6 @@ export class ApiService {
     }
   }
 
-  get_occurrence_data(sname: string) {
-    return this.httpClient.get<OccurrenceData>('http://obsvweb1.ou.edu/obis_db_scripts/occurrence-table.php?sname=' + sname);
-  }
-
-  isAcodeUnique(acode: string) {
-    return this.httpClient.get('http://obsvweb1.ou.edu/obis_db_scripts/check-acode.php?acode=' + acode);
-  }
-
-  doesFamilyExist(family: string) {
-    return this.httpClient.get('http://obsvweb1.ou.edu/obis_db_scripts/check-family.php?family=' + family);
-  }
-
   createHightaxRecord(newRecord: HightaxApi): Observable<HightaxApi> {
     const token = this.authenticationService.currentUserValue.key;
 
@@ -134,13 +119,5 @@ export class ApiService {
     return this.httpClient.post<HightaxApi>('https://obis.ou.edu/api/obis/hightax/', JSON.stringify(newRecord), httpOptions).pipe(
       catchError(this.handleError)
     );
-  }
-
-  getStatuses() {
-    return this.httpClient.get<Statuses>('http://obsvweb1.ou.edu/obis_db_scripts/statuses.php');
-  }
-
-  getSwaps() {
-    return this.httpClient.get<OkSwap>('http://obsvweb1.ou.edu/obis_db_scripts/swap.php');
   }
 }
