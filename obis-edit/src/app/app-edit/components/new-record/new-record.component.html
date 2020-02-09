@@ -65,12 +65,18 @@
             <input matInput placeholder="Global Element Code" formControlName="gelcode">
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="IUCN Code" formControlName="iucncode">
+            <mat-label>IUCN Code</mat-label>
+            <mat-select matInput formControlName="iucncode">
+              <mat-option *ngFor="let iucnCode of this.iucnCodes" [value]="iucnCode.id">{{iucnCode.display_name}}</mat-option>
+            </mat-select>
+            <div *ngIf="recordSubmitted && af.iucncode.errors">
+              <mat-error *ngIf="af.iucncode.errors.required">IUCN Code is required</mat-error>
+            </div>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Global Rank</mat-label>
             <mat-select matInput formControlName="g_rank">
-              <mat-option *ngFor="let gRank of this.gRanks" [value]="gRank.id">{{gRank.display_name}}</mat-option>
+              <mat-option *ngFor="let gRank of this.glRanks" [value]="gRank.id">{{gRank.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.g_rank.errors">
               <mat-error *ngIf="af.g_rank.errors.required">Global Rank is required</mat-error>
@@ -79,14 +85,20 @@
           <mat-form-field>
             <mat-label>State Rank</mat-label>
             <mat-select matInput formControlName="s_rank">
-              <mat-option *ngFor="let sRank of this.sRanks" [value]="sRank.id">{{sRank.display_name}}</mat-option>
+              <mat-option *ngFor="let sRank of this.stRanks" [value]="sRank.id">{{sRank.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.s_rank.errors">
               <mat-error *ngIf="af.s_rank.errors.required">State Rank is required</mat-error>
             </div>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Nativity" formControlName="nativity">
+            <mat-label>Nativity</mat-label>
+            <mat-select matInput formControlName="nativity">
+              <mat-option *ngFor="let nativity of this.nativities" [value]="nativity.id">{{nativity.display_name}}</mat-option>
+            </mat-select>
+            <div *ngIf="recordSubmitted && af.nativity.errors">
+              <mat-error *ngIf="af.nativity.errors.required">Nativity is required</mat-error>
+            </div>
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="Source" formControlName="source">
