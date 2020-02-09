@@ -44,41 +44,25 @@ export class NewRecordComponent implements OnInit {
 
   ngOnInit() {
     this.dbService.getIUCNCodes().subscribe(res => {
-      for (const iucnCode of res.iucn_codes) {
-        this.iucnCodes.push({id: iucnCode.id, display_name: iucnCode.display_name});
-      }
+      this.iucnCodes = res.iucn_codes;
     });
 
     this.dbService.getNativities().subscribe(res => {
-      for (const nativity of res.nativities) {
-        this.nativities.push({id: nativity.id, display_name: nativity.display_name});
-      }
+      this.nativities = res.nativities;
     });
 
     this.dbService.getSwaps().subscribe(res => {
-      for (const okSwap of res.ok_swap) {
-        this.swaps.push({id: okSwap.id, display_name: okSwap.display_name});
-      }
+      this.swaps = res.ok_swap;
     });
 
     this.dbService.getRanks().subscribe(res => {
-      for (const glRank of res.gl_ranks) {
-        this.glRanks.push({id: glRank.id, display_name: glRank.display_name});
-      }
-
-      for (const stRank of res.st_ranks) {
-        this.stRanks.push({id: stRank.id, display_name: stRank.display_name});
-      }
+      this.glRanks = res.gl_ranks;
+      this.stRanks = res.st_ranks;
     });
 
     this.dbService.getStatuses().subscribe(res => {
-      for (const fedStatus of res.fed_statuses) {
-        this.fedStatuses.push({id: fedStatus.id, display_name: fedStatus.display_name});
-      }
-
-      for (const stStatus of res.st_statuses) {
-        this.stStatuses.push({id: stStatus.id, display_name: stStatus.display_name});
-      }
+      this.fedStatuses = res.fed_statuses;
+      this.stStatuses = res.st_statuses;
     });
 
     this.acctaxForm = this.formBuilder.group({
