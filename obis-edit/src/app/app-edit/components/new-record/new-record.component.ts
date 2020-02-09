@@ -44,8 +44,8 @@ export class NewRecordComponent implements OnInit {
 
   ngOnInit() {
     this.dbService.getIUCNCodes().subscribe(res => {
-      for (const IUCNCode of res.iucn_codes) {
-        this.iucnCodes.push({id: IUCNCode.id, display_name: IUCNCode.display_name});
+      for (const iucnCode of res.iucn_codes) {
+        this.iucnCodes.push({id: iucnCode.id, display_name: iucnCode.display_name});
       }
     });
 
