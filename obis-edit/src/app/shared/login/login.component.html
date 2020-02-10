@@ -16,7 +16,7 @@
                     <mat-error *ngIf="f.password.errors.required">Password is required</mat-error>
                 </div>
             </mat-form-field>
-            <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+            <mat-spinner [style.display]="showSpinner ? 'block' : 'none'" [diameter]="50"></mat-spinner>
             <mat-error *ngIf="error" class="alert alert-danger">{{ error }}</mat-error>
         </mat-card-content>
         <mat-card-actions>
