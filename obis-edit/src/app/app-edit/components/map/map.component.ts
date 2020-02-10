@@ -42,12 +42,7 @@ export class MapComponent {
         BasemapGallery,
         LayerList,
         Expand,
-        SimpleRenderer,
         Extent,
-        SpatialReference,
-        Query,
-        QueryTask,
-        Graphic,
         Fullscreen
       ] = await loadModules([
           'esri/Map',
@@ -60,12 +55,7 @@ export class MapComponent {
           'esri/widgets/BasemapGallery',
           'esri/widgets/LayerList',
           'esri/widgets/Expand',
-          'esri/renderers/SimpleRenderer',
           'esri/geometry/Extent',
-          'esri/geometry/SpatialReference',
-          'esri/tasks/support/Query',
-          'esri/tasks/QueryTask',
-          'esri/Graphic',
           'esri/widgets/Fullscreen'
       ]);
 
