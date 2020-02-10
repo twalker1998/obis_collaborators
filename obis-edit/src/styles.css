@@ -78,6 +78,10 @@ a:hover {
     text-align: left;
 }
 
+.btn {
+  color: white;
+}
+
 .btn-link {
     color: #548235;
 }
@@ -140,6 +144,18 @@ a:hover {
     border-color: #548235;
 }
 
+mat-card {
+  box-shadow: none;
+}
+
+mat-card-title {
+  color: #548235;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
 .mat-toolbar.mat-primary {
     background: #548235;
 }
@@ -154,4 +170,21 @@ a:hover {
 
 .mat-form-field.mat-focused .mat-form-field-ripple {
   background-color: #72b446 !important;
+}
+
+.outline {
+  border: 2px solid #72b446;
+  border-radius: 10px !important;
+  margin-bottom: 10px;
+}
+
+.alert-danger {
+  background-color: #f44336;
+}
+
+.alert {
+  padding: 20px;
+  color: white;
+  margin-bottom: 15px;
+  text-align: center;
 }
