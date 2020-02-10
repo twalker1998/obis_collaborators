@@ -8,17 +8,17 @@
     margin: 50px;
 }
 
-mat-form-field {
-    width: 100%;
-}
-
-.alert-danger {
-    background-color: #f44336;
+mat-error {
+  padding-top: 10px;
 }
 
 .alert {
-    padding: 20px;
-    color: white;
-    margin-bottom: 15px;
-    text-align: center;
+  padding: 20px;
+  color: white;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.alert-danger {
+  background-color: #f44336;
 }

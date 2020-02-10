@@ -1,5 +1,5 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <mat-card class="login-card">
+    <mat-card class="login-card outline">
         <mat-card-header>
             <mat-card-title>Login</mat-card-title>
         </mat-card-header>
@@ -16,11 +16,11 @@
                     <mat-error *ngIf="f.password.errors.required">Password is required</mat-error>
                 </div>
             </mat-form-field>
-            <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+            <mat-spinner [style.display]="showSpinner ? 'block' : 'none'" [diameter]="50"></mat-spinner>
             <mat-error *ngIf="error" class="alert alert-danger">{{ error }}</mat-error>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button type="submit" color="primary">Login</button>
+            <button mat-raised-button type="submit" class="btn btn-primary centered">Login</button>
         </mat-card-actions>
     </mat-card>
 </form>
