@@ -1,8 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { loadModules } from 'esri-loader';
 
-import { GetSnameResponse } from '../../../shared/models/php/get-sname-response';
-
 import { DbService } from '../../core/db.service';
 import { MapService } from '../../core/map.service';
 
