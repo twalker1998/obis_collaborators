@@ -22,11 +22,11 @@ export class DbService {
   }
 
   isAcodeUnique(acode: string) {
-    return this.httpClient.get(this.baseUrl + 'check-acode.php?acode=' + acode);
+    return this.httpClient.get(this.baseUrl + 'check-acode.php?acode=' + acode + '&fn=validity');
   }
 
   getSname(acode: string) {
-    return this.httpClient.get<GetSnameResponse>(this.baseUrl + 'get-sname.php?acode=' + acode);
+    return this.httpClient.get<GetSnameResponse>(this.baseUrl + 'check-acode.php?acode=' + acode + '&fn=sname');
   }
 
   doesFamilyExist(family: string) {
