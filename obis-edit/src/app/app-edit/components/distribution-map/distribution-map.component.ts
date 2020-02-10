@@ -21,28 +21,14 @@ export class DistributionMapComponent implements OnInit {
         MapView,
         FeatureLayer,
         Home,
-        Legend,
-        Expand,
-        SimpleRenderer,
         Extent,
-        SpatialReference,
-        Query,
-        QueryTask,
-        Graphic,
         Fullscreen
       ] = await loadModules([
         'esri/Map',
         'esri/views/MapView',
         'esri/layers/FeatureLayer',
         'esri/widgets/Home',
-        'esri/widgets/Legend',
-        'esri/widgets/Expand',
-        'esri/renderers/SimpleRenderer',
         'esri/geometry/Extent',
-        'esri/geometry/SpatialReference',
-        'esri/tasks/support/Query',
-        'esri/tasks/QueryTask',
-        'esri/Graphic',
         'esri/widgets/Fullscreen'
       ]);
 
@@ -55,41 +41,12 @@ export class DistributionMapComponent implements OnInit {
         spatialReference: { wkid: 4326 } // this is for the extent only; need to set map spatial reference in view.
       });
 
-      const speciesquery = 'acode=\'' + this.acode + '\'';
+      const speciesquery = 'sname=\'Grus americana\'';
+      // const speciesquery = 'acode=\'' + this.acode + '\'';
 
       // Oklahoma Counties Layer
       const okcounties = new FeatureLayer({
         url: 'https://obsgis.csa.ou.edu:6443/arcgis/rest/services/ONHI/ArcGISServer_Counties/MapServer'
-      });
-
-      const cotemplate = {
-        // autocasts as new PopupTemplate()
-        title: '<em>{sname}</em> ({vernacularname})',
-        content: 'ONHI has {count} occurrence record(s) for <em>{sname}</em> ({vernacularname}) in {county} County'
-      };
-
-      // County Occurrences Layer
-      const coquery = new FeatureLayer({
-        url: 'https://obsgis.csa.ou.edu:6443/arcgis/rest/services/ONHI/OBIS_County_Occurrences_Poly/MapServer/0/',
-        definitionExpression: speciesquery,
-        title: 'County Occurrences',
-        outFields: ['*'],
-        popupTemplate: cotemplate
-      });
-
-      const hextemplate = {
-        // autocasts as new PopupTemplate()
-        title: '<em>{sname}</em> ({vernacularname})',
-        content: 'ONHI has {count} occurrence record(s) for <em>{sname}</em> ({vernacularname}) in this hexagon'
-      };
-
-      // Hex Occurrences Layer
-      const hexquery = new FeatureLayer({
-        url: 'https://obsgis.csa.ou.edu:6443/arcgis/rest/services/ONHI/OBIS_5km_Occurrences/MapServer/0/',
-        definitionExpression: speciesquery,
-        title: 'Georeferenced Occurrences',
-        outFields: ['*'],
-        popupTemplate: hextemplate
       });
 
       const octemplate = {
@@ -161,26 +118,6 @@ export class DistributionMapComponent implements OnInit {
 
       // Add the home button to the top left corner of the view
       view.ui.add(homeBtn, 'top-left');
-
-      const legend = new Expand({
-        content: new Legend({
-          view,
-          style: 'classic',
-          layerInfos: [
-            {
-              layer: hexquery
-            },
-            {
-              layer: coquery
-            }
-          ]
-        }),
-        view,
-        expandTooltip: 'Legend',
-        expanded: false
-      });
-
-      view.ui.add(legend, 'bottom-left');
 
       const fullscreen = new Fullscreen({
         view
