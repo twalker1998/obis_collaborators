@@ -156,6 +156,10 @@ mat-form-field {
   width: 100%;
 }
 
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #72b446;
+}
+
 .mat-toolbar.mat-primary {
     background: #548235;
 }
