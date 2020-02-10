@@ -164,7 +164,13 @@ export class NewRecordComponent implements OnInit {
   }
 
   openDialog(): void {
-    const familyVal = this.af.family.value;
+    let familyVal = '';
+
+    if (this.acctaxForm.get('family').hasError('nonExistingFamily')) {
+      familyVal = this.af.family.value;
+    } else if (this.syntaxForm.get('family').hasError('nonExistingFamily')) {
+      familyVal = this.sf.family.value;
+    }
 
     const dialogRef = this.dialog.open(NewFamilyRecordComponent, {
       width: 'auto',
@@ -175,6 +181,8 @@ export class NewRecordComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (this.acctaxForm.get('family').hasError('nonExistingFamily')) {
         this.acctaxForm.get('family').updateValueAndValidity();
+      } else if (this.syntaxForm.get('family').hasError('nonExistingFamily')) {
+        this.syntaxForm.get('family').updateValueAndValidity();
       }
     });
   }

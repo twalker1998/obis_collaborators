@@ -208,7 +208,12 @@
               <div *ngIf="syntaxFormSubmitted && sf.family.errors">
                 <mat-error *ngIf="sf.family.errors.required">Family is required</mat-error>
               </div>
+              <mat-icon matSuffix><mat-spinner [style.display]="(syntaxForm.get('family').status === 'PENDING') ? 'block' : 'none'" [diameter]="20"></mat-spinner></mat-icon>
+              <mat-icon matSuffix *ngIf="syntaxForm.get('family').hasError('nonExistingFamily')" [ngStyle]="{'color': '#f44336'}">error</mat-icon>
+              <mat-error class="errorMessageDisplay" *ngIf="syntaxForm.get('family').hasError('nonExistingFamily')">Family doesn't exist. <a [routerLink]="" (click)="openDialog()">Create a new one?</a></mat-error>
+              <mat-icon matSuffix *ngIf="syntaxForm.get('family').valid" [ngStyle]="{'color': '#72b446'}">check</mat-icon>
             </mat-form-field>
+            <div class="errorMessageDisplay" *ngIf="syntaxForm.get('family').hasError('nonExistingFamily')"></div>
             <mat-form-field>
               <input matInput placeholder="Genus" formControlName="genus">
               <div *ngIf="syntaxFormSubmitted && sf.genus.errors">
