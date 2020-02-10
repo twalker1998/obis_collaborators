@@ -14,7 +14,7 @@ export class AcodeValidator implements Validator {
 
     return new Promise(resolve => {
       this.debouncer = setTimeout(() => {
-        this.dbService.checkAcode(control.value).subscribe((res) => {
+        this.dbService.isAcodeUnique(control.value).subscribe((res) => {
           resolve(null);
         }, (err) => {
           resolve({acodeInUse: true});
