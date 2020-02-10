@@ -65,12 +65,18 @@
             <input matInput placeholder="Global Element Code" formControlName="gelcode">
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="IUCN Code" formControlName="iucncode">
+            <mat-label>IUCN Code</mat-label>
+            <mat-select matInput formControlName="iucncode">
+              <mat-option *ngFor="let iucnCode of this.iucnCodes" [value]="iucnCode.id">{{iucnCode.display_name}}</mat-option>
+            </mat-select>
+            <div *ngIf="recordSubmitted && af.iucncode.errors">
+              <mat-error *ngIf="af.iucncode.errors.required">IUCN Code is required</mat-error>
+            </div>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Global Rank</mat-label>
             <mat-select matInput formControlName="g_rank">
-              <mat-option *ngFor="let gRank of this.gRanks" [value]="gRank.value">{{gRank.viewValue}}</mat-option>
+              <mat-option *ngFor="let gRank of this.glRanks" [value]="gRank.id">{{gRank.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.g_rank.errors">
               <mat-error *ngIf="af.g_rank.errors.required">Global Rank is required</mat-error>
@@ -79,14 +85,20 @@
           <mat-form-field>
             <mat-label>State Rank</mat-label>
             <mat-select matInput formControlName="s_rank">
-              <mat-option *ngFor="let sRank of this.sRanks" [value]="sRank.value">{{sRank.viewValue}}</mat-option>
+              <mat-option *ngFor="let sRank of this.stRanks" [value]="sRank.id">{{sRank.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.s_rank.errors">
               <mat-error *ngIf="af.s_rank.errors.required">State Rank is required</mat-error>
             </div>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Nativity" formControlName="nativity">
+            <mat-label>Nativity</mat-label>
+            <mat-select matInput formControlName="nativity">
+              <mat-option *ngFor="let nativity of this.nativities" [value]="nativity.id">{{nativity.display_name}}</mat-option>
+            </mat-select>
+            <div *ngIf="recordSubmitted && af.nativity.errors">
+              <mat-error *ngIf="af.nativity.errors.required">Nativity is required</mat-error>
+            </div>
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="Source" formControlName="source">
@@ -100,7 +112,7 @@
           <mat-form-field>
             <mat-label>Federal Status</mat-label>
             <mat-select matInput formControlName="fed_status">
-              <mat-option *ngFor="let fedStatus of this.fedStatus" [value]="fedStatus.value">{{fedStatus.viewValue}}</mat-option>
+              <mat-option *ngFor="let fedStatus of this.fedStatuses" [value]="fedStatus.id">{{fedStatus.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.fed_status.errors">
               <mat-error *ngIf="af.fed_status.errors.required">Federal Status is required</mat-error>
@@ -109,7 +121,7 @@
           <mat-form-field>
             <mat-label>State Status</mat-label>
             <mat-select matInput formControlName="st_status">
-              <mat-option *ngFor="let stStatus of this.stStatus" [value]="stStatus.value">{{stStatus.viewValue}}</mat-option>
+              <mat-option *ngFor="let stStatus of this.stStatuses" [value]="stStatus.id">{{stStatus.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.st_status.errors">
               <mat-error *ngIf="af.st_status.errors.required">State Status is required</mat-error>
@@ -118,7 +130,7 @@
           <mat-form-field>
             <mat-label>OK Swap</mat-label>
             <mat-select matInput formControlName="swap">
-              <mat-option *ngFor="let swap of this.swap" [value]="swap.value">{{swap.viewValue}}</mat-option>
+              <mat-option *ngFor="let swap of this.swaps" [value]="swap.id">{{swap.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.swap.errors">
               <mat-error *ngIf="af.swap.errors.required">OK Swap is required</mat-error>
@@ -176,7 +188,12 @@
               <div *ngIf="syntaxFormSubmitted && sf.scode.errors">
                 <mat-error *ngIf="sf.scode.errors.required">scode is required</mat-error>
               </div>
+              <mat-icon matSuffix><mat-spinner [style.display]="(syntaxForm.get('scode').status === 'PENDING') ? 'block' : 'none'" [diameter]="20"></mat-spinner></mat-icon>
+              <mat-icon matSuffix *ngIf="syntaxForm.get('scode').hasError('acodeInUse')" [ngStyle]="{'color': '#f44336'}">error</mat-icon>
+              <mat-error class="errorMessageDisplay" *ngIf="syntaxForm.get('scode').hasError('acodeInUse')">scode is already in use</mat-error>
+              <mat-icon matSuffix *ngIf="syntaxForm.get('scode').valid" [ngStyle]="{'color': '#72b446'}">check</mat-icon>
             </mat-form-field>
+            <div class="errorMessageDisplay" *ngIf="syntaxForm.get('scode').hasError('acodeInUse')"></div>
             <mat-form-field>
               <input matInput placeholder="Scientific Name" formControlName="sname">
               <div *ngIf="syntaxFormSubmitted && sf.sname.errors">
@@ -191,7 +208,12 @@
               <div *ngIf="syntaxFormSubmitted && sf.family.errors">
                 <mat-error *ngIf="sf.family.errors.required">Family is required</mat-error>
               </div>
+              <mat-icon matSuffix><mat-spinner [style.display]="(syntaxForm.get('family').status === 'PENDING') ? 'block' : 'none'" [diameter]="20"></mat-spinner></mat-icon>
+              <mat-icon matSuffix *ngIf="syntaxForm.get('family').hasError('nonExistingFamily')" [ngStyle]="{'color': '#f44336'}">error</mat-icon>
+              <mat-error class="errorMessageDisplay" *ngIf="syntaxForm.get('family').hasError('nonExistingFamily')">Family doesn't exist. <a [routerLink]="" (click)="openDialog()">Create a new one?</a></mat-error>
+              <mat-icon matSuffix *ngIf="syntaxForm.get('family').valid" [ngStyle]="{'color': '#72b446'}">check</mat-icon>
             </mat-form-field>
+            <div class="errorMessageDisplay" *ngIf="syntaxForm.get('family').hasError('nonExistingFamily')"></div>
             <mat-form-field>
               <input matInput placeholder="Genus" formControlName="genus">
               <div *ngIf="syntaxFormSubmitted && sf.genus.errors">
