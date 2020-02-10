@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { GetSnameResponse } from '../../shared/models/php/get-sname-response';
 import { IUCN } from '../../shared/models/php/iucn';
 import { Nativity } from '../../shared/models/php/nativity';
 import { OccurrenceData } from '../../shared/models/occurrence-data';
@@ -21,7 +22,11 @@ export class DbService {
   }
 
   isAcodeUnique(acode: string) {
-    return this.httpClient.get(this.baseUrl + 'check-acode.php?acode=' + acode);
+    return this.httpClient.get(this.baseUrl + 'check-acode.php?acode=' + acode + '&fn=validity');
+  }
+
+  getSname(acode: string) {
+    return this.httpClient.get<GetSnameResponse>(this.baseUrl + 'check-acode.php?acode=' + acode + '&fn=sname');
   }
 
   doesFamilyExist(family: string) {
