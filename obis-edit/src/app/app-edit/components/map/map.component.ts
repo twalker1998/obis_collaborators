@@ -1,6 +1,9 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { loadModules } from 'esri-loader';
 
+import { GetSnameResponse } from '../../../shared/models/php/get-sname-response';
+
+import { DbService } from '../../core/db.service';
 import { MapService } from '../../core/map.service';
 
 @Component({
@@ -12,19 +15,23 @@ export class MapComponent {
   @Output() mapLoadedEvent = new EventEmitter<boolean>();
 
   isResultLoaded: boolean;
+  sname: string;
 
-  constructor(private mapService: MapService) {
+  constructor(private mapService: MapService, private dbService: DbService) {
     this.mapService.acode.subscribe(acode => {
       if (acode === 'search') {
         this.isResultLoaded = false;
       } else {
-        this.isResultLoaded = true;
-        this.initializeMap(acode);
+        this.dbService.getSname(acode).subscribe(res => {
+          this.sname = res.sname;
+          this.isResultLoaded = true;
+          this.initializeMap();
+        });
       }
     });
   }
 
-  public async initializeMap(acode: string) {
+  public async initializeMap() {
     try {
       const [
         Map,
@@ -43,7 +50,8 @@ export class MapComponent {
         Query,
         QueryTask,
         Graphic,
-        Fullscreen] = await loadModules([
+        Fullscreen
+      ] = await loadModules([
           'esri/Map',
           'esri/views/MapView',
           'esri/layers/GroupLayer',
@@ -72,35 +80,19 @@ export class MapComponent {
         spatialReference: {wkid: 4326} // this is for the extent only; need to set map spatial reference in view.
       });
 
-      // var speciesquery = "acode='B-GRAM'"
-      const speciesquery = 'acode=\'' + acode + '\'';
+      const speciesquery = 'sname=\'' + this.sname + '\'';
 
       // Oklahoma Counties Layer
       const okcounties = new FeatureLayer({
         url: 'https://obsgis.csa.ou.edu:6443/arcgis/rest/services/ONHI/ArcGISServer_Counties/FeatureServer',
-        title: 'Oklahoma Counties'
-      });
-
-      const cotemplate = {
-        // autocasts as new PopupTemplate()
-        title: '<em>{sname}</em> ({vernacularname})',
-        content: 'ONHI has {count} occurrence record(s) for <em>{sname}</em> ({vernacularname}) in {county} County'
-      };
-
-      // County Occurrences Layer
-      const coquery = new FeatureLayer({
-        url: 'https://obsgis.csa.ou.edu:6443/arcgis/rest/services/ONHI/OBIS_County_Occurrences_Poly/MapServer/0/',
-        definitionExpression: speciesquery,
-        title: 'County Occurrences',
-        outFields: ['*'],
-        popupTemplate: cotemplate
+        title: 'Oklahoma Counties',
       });
 
       // Ecological Systems
       const okecos = new MapImageLayer({
         url: 'https://obsgis.csa.ou.edu:6443/arcgis/rest/services/EcologicalSystems/OKECOS/MapServer',
-          title: 'Ecological Systems',
-          visible: false
+        title: 'Ecological Systems',
+        visible: false
       });
 
       const ecoivtemplate = {
@@ -173,28 +165,54 @@ export class MapComponent {
         visible: false
       });
 
-      const hextemplate = {
+
+      const octemplate = {
         // autocasts as new PopupTemplate()
-        title: '<em>{sname}</em> ({vernacularname})',
-        content: 'ONHI has {count} occurrence record(s) for <em>{sname}</em> ({vernacularname}) in this hexagon'
+        title: '<em>{sname}</em> ({vernacularname}): {datasetname}',
+        content: [
+          {
+            type: 'fields',
+            fieldInfos: [
+              {
+                fieldName: 'eventdate',
+                label: 'Date of Occurrence:'
+              },
+              {
+                fieldName: 'recordedby',
+                label: 'Recorded By:'
+              },
+              {
+                fieldName: 'catalognumber',
+                label: 'Catalog Number:'
+              },
+              {
+                fieldName: 'institutioncode',
+                label: 'Institution:'
+              },
+              {
+                fieldName: 'locality',
+                label: 'Locality:'
+              },
+              {
+                fieldName: 'habitat',
+                label: 'Habitat:'
+              },
+              {
+                fieldName: 'basisofrecord',
+                label: 'Basis of Record:'
+              }
+            ]
+          }
+        ]
       };
 
-      // Hex Occurrences Layer
-      const hexquery = new FeatureLayer({
-        url: 'https://obsgis.csa.ou.edu:6443/arcgis/rest/services/ONHI/OBIS_5km_Occurrences/MapServer/0/',
+      // Occurrences Layer
+      const ocquery = new FeatureLayer({
+        url: 'https://obsgis.csa.ou.edu:6443/arcgis/rest/services/ONHI/All_Occurrences/MapServer/0/',
         definitionExpression: speciesquery,
-        title: 'Georeferenced Occurrences',
+        title: 'OBIS Occurrences',
         outFields: ['*'],
-        popupTemplate: hextemplate
-      });
-
-      // Create GroupLayer for occurrences
-      const occurrencesGroupLayer = new GroupLayer({
-        title: 'Occurrences',
-        visible: true,
-        // visibilityMode: "exclusive",
-        layers: [coquery, hexquery],
-        opacity: 0.75
+        popupTemplate: octemplate
       });
 
       // Township/Range
@@ -223,7 +241,7 @@ export class MapComponent {
 
       const map = new Map({
         // basemap: "satellite",
-        layers: [PLSS, okecos, geo, swap, ecoiv, df, okpad, okcounties, occurrencesGroupLayer]
+        layers: [PLSS, okecos, geo, swap, ecoiv, df, okpad, okcounties, ocquery]
       });
 
       const view = new MapView({
@@ -258,12 +276,12 @@ export class MapComponent {
           exactMatch: false,
           outFields: ['label'],
           name: 'Township/Range',
-          placeholder: 'example: 12N 10W'
+          placeholder: 'example: 12N 10W',
         },
 
         {
           layer: new FeatureLayer({ // Notice the property is called layer Not featureLayer new to 4.11
-          url: 'https://services.arcgis.com/3xOwF6p0r7IHIjfn/arcgis/rest/services/PLSS/FeatureServer/1',
+            url: 'https://services.arcgis.com/3xOwF6p0r7IHIjfn/arcgis/rest/services/PLSS/FeatureServer/1',
             popupTemplate: { // autocasts as new PopupTemplate()
               title: '{STR_label}',
               overwriteActions: true
@@ -280,12 +298,12 @@ export class MapComponent {
 
         {
           layer: new FeatureLayer({ // Notice the property is called layer Not featureLayer new to 4.11
-          url: 'https://obsgis.csa.ou.edu:6443/arcgis/rest/services/ONHI/ArcGISServer_Counties/FeatureServer/0',
-          popupTemplate: { // autocasts as new PopupTemplate()
-            title: '{name} County',
-            overwriteActions: true
-          }
-        }),
+            url: 'https://obsgis.csa.ou.edu:6443/arcgis/rest/services/ONHI/ArcGISServer_Counties/FeatureServer/0',
+            popupTemplate: { // autocasts as new PopupTemplate()
+              title: '{name} County',
+              overwriteActions: true
+            }
+          }),
 
           searchFields: ['name'],
           displayField: 'name',
@@ -333,13 +351,21 @@ export class MapComponent {
         }
       });
 
-      view.ui.add(layerList, 'bottom-left');
+      // Create an Expand instance for legend gallery
+      const lgExpand = new Expand({
+        view,
+        expandTooltip: 'Expand Layer List',
+        content: layerList
+      });
 
-      // var fullscreen = new Fullscreen({
-      //   view: view
-      // });
+      // Add the expand instance to the ui
+      view.ui.add(lgExpand, 'top-left');
 
-      // view.ui.add(fullscreen, "top-right");
+      const fullscreen = new Fullscreen({
+        view
+      });
+
+      view.ui.add(fullscreen, 'top-right');
 
       return new MapView(view);
     } catch (error) {
