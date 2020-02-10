@@ -1,0 +1,31 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    pushd obis-edit
+    npm install -g @angular/cli
+    npm install
+    ng build --prod --base-href="/obis_collaborators"
+    popd
+  displayName: 'npm install and build'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'obis-edit/dist/obis-edit'
+    ArtifactName: 'obis_collaborators'
+    publishLocation: 'Container'
+  displayName: 'Publish Artifacts'
