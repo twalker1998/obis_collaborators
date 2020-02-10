@@ -147,3 +147,11 @@ a:hover {
 .mat-input-element {
     caret-color: #548235;
 }
+
+.mat-focused .mat-form-field-label {
+  color: #548235 !important;
+}
+
+.mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: #72b446 !important;
+}
