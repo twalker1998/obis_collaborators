@@ -19,7 +19,7 @@ steps:
     pushd obis-edit
     npm install -g @angular/cli
     npm install
-    ng build --prod --base-href="/obis_collaborators"
+    ng build --prod --base-href="/obis_collaborators/"
     popd
   displayName: 'npm install and build'
 
