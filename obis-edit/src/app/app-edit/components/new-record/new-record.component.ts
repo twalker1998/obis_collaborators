@@ -99,7 +99,7 @@ export class NewRecordComponent implements OnInit {
     });
 
     this.syntaxForm = this.formBuilder.group({
-      scode: ['', Validators.required],
+      scode: ['', Validators.required, this.acodeValidator.validate.bind(this.acodeValidator)],
       sname: ['', Validators.required],
       sname_author: null,
       family: ['', Validators.required, this.familyValidator.validate.bind(this.familyValidator)],

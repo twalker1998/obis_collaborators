@@ -188,7 +188,12 @@
               <div *ngIf="syntaxFormSubmitted && sf.scode.errors">
                 <mat-error *ngIf="sf.scode.errors.required">scode is required</mat-error>
               </div>
+              <mat-icon matSuffix><mat-spinner [style.display]="(syntaxForm.get('scode').status === 'PENDING') ? 'block' : 'none'" [diameter]="20"></mat-spinner></mat-icon>
+              <mat-icon matSuffix *ngIf="syntaxForm.get('scode').hasError('acodeInUse')" [ngStyle]="{'color': '#f44336'}">error</mat-icon>
+              <mat-error class="errorMessageDisplay" *ngIf="syntaxForm.get('scode').hasError('acodeInUse')">scode is already in use</mat-error>
+              <mat-icon matSuffix *ngIf="syntaxForm.get('scode').valid" [ngStyle]="{'color': '#72b446'}">check</mat-icon>
             </mat-form-field>
+            <div class="errorMessageDisplay" *ngIf="syntaxForm.get('scode').hasError('acodeInUse')"></div>
             <mat-form-field>
               <input matInput placeholder="Scientific Name" formControlName="sname">
               <div *ngIf="syntaxFormSubmitted && sf.sname.errors">
