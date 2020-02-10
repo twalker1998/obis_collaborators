@@ -11,3 +11,14 @@
 mat-error {
   padding-top: 10px;
 }
+
+.alert {
+  padding: 20px;
+  color: white;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.alert-danger {
+  background-color: #f44336;
+}
