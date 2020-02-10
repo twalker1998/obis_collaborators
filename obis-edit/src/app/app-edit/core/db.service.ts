@@ -20,7 +20,7 @@ export class DbService {
     return this.httpClient.get<OccurrenceData>(this.baseUrl + 'occurrence-table.php?sname=' + sname);
   }
 
-  isAcodeUnique(acode: string) {
+  checkAcode(acode: string) {
     return this.httpClient.get(this.baseUrl + 'check-acode.php?acode=' + acode);
   }
 
