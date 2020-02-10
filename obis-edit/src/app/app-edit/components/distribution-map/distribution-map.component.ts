@@ -7,7 +7,7 @@ import { loadModules } from 'esri-loader';
   styleUrls: ['./distribution-map.component.css']
 })
 export class DistributionMapComponent implements OnInit {
-  @Input() acode: string;
+  @Input() sname: string;
 
   @Output() mapLoadedEvent = new EventEmitter<boolean>();
 
@@ -41,8 +41,7 @@ export class DistributionMapComponent implements OnInit {
         spatialReference: { wkid: 4326 } // this is for the extent only; need to set map spatial reference in view.
       });
 
-      const speciesquery = 'sname=\'Grus americana\'';
-      // const speciesquery = 'acode=\'' + this.acode + '\'';
+      const speciesquery = 'sname=\'' + this.sname + '\'';
 
       // Oklahoma Counties Layer
       const okcounties = new FeatureLayer({
