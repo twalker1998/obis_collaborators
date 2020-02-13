@@ -181,3 +181,7 @@ mat-form-field {
   border-radius: 10px !important;
   margin-bottom: 10px;
 }
+
+.mat-tooltip {
+  font-size: 13px !important;
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { TooltipPosition } from '@angular/material/tooltip';
 
 import { NewFamilyRecordComponent } from '../new-family-record/new-family-record.component';
 import { Option } from '../../../shared/models/php/option';
@@ -35,8 +36,12 @@ export class NewRecordComponent implements OnInit {
   swaps: Array<Option> = new Array<Option>();
   glRanks: Array<Option> = new Array<Option>();
   stRanks: Array<Option> = new Array<Option>();
+  stRankDefault: number;
   fedStatuses: Array<Option> = new Array<Option>();
   stStatuses: Array<Option> = new Array<Option>();
+
+  // Testing for tooltips
+  position: TooltipPosition = 'above';
 
   constructor(private formBuilder: FormBuilder, private dbService: DbService,
               private acodeValidator: AcodeValidator, private familyValidator: FamilyValidator, public dialog: MatDialog) { }
@@ -57,6 +62,13 @@ export class NewRecordComponent implements OnInit {
     this.dbService.getRanks().subscribe(res => {
       this.glRanks = res.gl_ranks;
       this.stRanks = res.st_ranks;
+
+      for (const stRank of this.stRanks) {
+        if (stRank.display_name === 'SNR') {
+          this.stRankDefault = stRank.id;
+          break;
+        }
+      }
     });
 
     this.dbService.getStatuses().subscribe(res => {
