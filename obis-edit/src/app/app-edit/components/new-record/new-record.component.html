@@ -129,7 +129,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>OK Swap</mat-label>
-            <mat-select matInput matTooltip="State Wildlife Action Plan tier, allowable values available via a dropdown list." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" formControlName="swap">
+            <mat-select matInput matTooltip="State Wildlife Action Plan tier, allowable values available via a dropdown list." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" [(ngModel)]="this.noneOption" formControlName="swap">
               <mat-option *ngFor="let swap of this.swaps" [value]="swap.id">{{swap.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.swap.errors">
