@@ -58,7 +58,9 @@ export class NewRecordComponent implements OnInit {
     });
 
     this.dbService.getNativities().subscribe(res => {
-      this.nativities = res.nativities;
+      for (const nativity of res.nativities) {
+        this.nativities.push(nativity);
+      }
     });
 
     this.dbService.getSwaps().subscribe(res => {
