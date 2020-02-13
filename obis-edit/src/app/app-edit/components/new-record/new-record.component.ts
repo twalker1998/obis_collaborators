@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { TooltipPosition } from '@angular/material/tooltip';
 
@@ -36,8 +36,10 @@ export class NewRecordComponent implements OnInit {
   swaps: Array<Option> = new Array<Option>();
   glRanks: Array<Option> = new Array<Option>();
   glRankDefault: number;
+  glRankFilter: FormControl = new FormControl();
   stRanks: Array<Option> = new Array<Option>();
   stRankDefault: number;
+  stRankFilter: FormControl = new FormControl();
   fedStatuses: Array<Option> = new Array<Option>();
   stStatuses: Array<Option> = new Array<Option>();
   noneOption = 0;
