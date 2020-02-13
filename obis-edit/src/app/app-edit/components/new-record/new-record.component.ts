@@ -49,7 +49,11 @@ export class NewRecordComponent implements OnInit {
 
   ngOnInit() {
     this.dbService.getIUCNCodes().subscribe(res => {
-      this.iucnCodes = res.iucn_codes;
+      this.iucnCodes.push({id: 0, display_name: 'None'});
+
+      for (const iucnCode of res.iucn_codes) {
+        this.iucnCodes.push(iucnCode);
+      }
     });
 
     this.dbService.getNativities().subscribe(res => {
