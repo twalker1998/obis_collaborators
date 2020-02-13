@@ -35,6 +35,7 @@ export class NewRecordComponent implements OnInit {
   nativities: Array<Option> = new Array<Option>();
   swaps: Array<Option> = new Array<Option>();
   glRanks: Array<Option> = new Array<Option>();
+  glRankDefault: number;
   stRanks: Array<Option> = new Array<Option>();
   stRankDefault: number;
   fedStatuses: Array<Option> = new Array<Option>();
@@ -71,6 +72,13 @@ export class NewRecordComponent implements OnInit {
     this.dbService.getRanks().subscribe(res => {
       this.glRanks = res.gl_ranks;
       this.stRanks = res.st_ranks;
+
+      for (const glRank of this.glRanks) {
+        if (glRank.display_name === 'GNR') {
+          this.glRankDefault = glRank.id;
+          break;
+        }
+      }
 
       for (const stRank of this.stRanks) {
         if (stRank.display_name === 'SNR') {
