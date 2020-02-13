@@ -7,7 +7,7 @@
         </mat-card-header>
         <mat-card-content>
           <mat-form-field>
-            <input matInput matTooltip="Unique code for the taxon. For plants, use the TSN (if available). For animals, use the first letter of the taxonomic group to which it belongs (e.g. birds (B), fish (F), invertebrates (I), or mammals (M)), followed by a hyphen, then the first two letters of the genus and species. For instance, Grus americana is B-GRAM and Ovis canadensis is M-OVCA. For a subspecies, such as Agkistrodon contortrix contortrix, also include the first letter of the subspecies, e.g. H-AGCOC. If an acode is already in use, such as F-CYCA, add a suquential number to the ending, e.g. F-CYCA2. Codes, except TSN, should be all upper case." [matTooltipPosition]="this.position" placeholder="acode" formControlName="acode">
+            <input matInput placeholder="acode" matTooltip="Unique code for the taxon. For plants, use the TSN (if available). For animals, use the first letter of the taxonomic group to which it belongs (e.g. birds (B), fish (F), invertebrates (I), or mammals (M)), followed by a hyphen, then the first two letters of the genus and species. For instance, Grus americana is B-GRAM and Ovis canadensis is M-OVCA. For a subspecies, such as Agkistrodon contortrix contortrix, also include the first letter of the subspecies, e.g. H-AGCOC. If an acode is already in use, such as F-CYCA, add a suquential number to the ending, e.g. F-CYCA2. Codes, except TSN, should be all upper case." [matTooltipPosition]="this.position" formControlName="acode">
             <div *ngIf="recordSubmitted && af.acode.errors">
               <mat-error *ngIf="af.acode.errors.required">acode is required</mat-error>
             </div>
@@ -18,16 +18,16 @@
           </mat-form-field>
           <div class="errorMessageDisplay" *ngIf="acctaxForm.get('acode').hasError('acodeInUse')"></div>
           <mat-form-field>
-            <input matInput matTooltip="Scientific name without authority. For instance, Vireo atricapilla or Rhus aromatica, entered following standard scientific binomial and trinomial conventions." [matTooltipPosition]="this.position" placeholder="Scientific Name" formControlName="sname">
+            <input matInput placeholder="Scientific Name" matTooltip="Scientific name without authority. For instance, Vireo atricapilla or Rhus aromatica, entered following standard scientific binomial and trinomial conventions." [matTooltipPosition]="this.position" formControlName="sname">
             <div *ngIf="recordSubmitted && af.sname.errors">
               <mat-error *ngIf="af.sname.errors.required">Scientific Name is required</mat-error>
             </div>
           </mat-form-field>
           <mat-form-field>
-            <input matInput matTooltip="The scientific authority, e.g. L., Audubon 1827, or (Bellardi) Ehrend." [matTooltipPosition]="this.position" placeholder="Scientific Name Authorship" formControlName="sname_author">
+            <input matInput placeholder="Scientific Name Authorship" matTooltip="The scientific authority, e.g. L., Audubon 1827, or (Bellardi) Ehrend." [matTooltipPosition]="this.position" formControlName="sname_author">
           </mat-form-field>
           <mat-form-field>
-            <input matInput matTooltip="Taxonomic family to which the taxon belongs, entered in proper case, e.g. Fagaceae or Apidae. The family must be in the higher taxonomy table. If it is not in that table, it must be added before a new taxon in that family can be added." [matTooltipPosition]="this.position" placeholder="Family" formControlName="family">
+            <input matInput placeholder="Family" matTooltip="Taxonomic family to which the taxon belongs, entered in proper case, e.g. Fagaceae or Apidae. The family must be in the higher taxonomy table. If it is not in that table, it must be added before a new taxon in that family can be added." [matTooltipPosition]="this.position" formControlName="family">
             <div *ngIf="recordSubmitted && af.family.errors">
               <mat-error *ngIf="af.family.errors.required">Family is required</mat-error>
             </div>
@@ -38,13 +38,13 @@
           </mat-form-field>
           <div class="errorMessageDisplay" *ngIf="acctaxForm.get('family').hasError('nonExistingFamily')"></div>
           <mat-form-field>
-            <input matInput matTooltip="The taxonomic genus to which the taxon belongs, the values should be in proper case, e.g. Andropogon or Notropis." [matTooltipPosition]="this.position" placeholder="Genus" formControlName="genus">
+            <input matInput placeholder="Genus" matTooltip="The taxonomic genus to which the taxon belongs, the values should be in proper case, e.g. Andropogon or Notropis." [matTooltipPosition]="this.position" formControlName="genus">
             <div *ngIf="recordSubmitted && af.genus.errors">
               <mat-error *ngIf="af.genus.errors.required">Genus is required</mat-error>
             </div>
           </mat-form-field>
           <mat-form-field>
-            <input matInput matTooltip="The specific taxonomic rank. The values should be in lowercase e.g. americanus or vulpes." [matTooltipPosition]="this.position" placeholder="Species" formControlName="species">
+            <input matInput placeholder="Species" matTooltip="The specific taxonomic rank. The values should be in lowercase e.g. americanus or vulpes." [matTooltipPosition]="this.position" formControlName="species">
             <div *ngIf="recordSubmitted && af.species.errors">
               <mat-error *ngIf="af.species.errors.required">Species is required</mat-error>
             </div>
@@ -76,7 +76,7 @@
           <mat-form-field>
             <mat-label>Global Rank</mat-label>
             <mat-select matInput matTooltip="NatureServe's Global Conservation Status rank." [matTooltipPosition]="this.position" formControlName="g_rank">
-              <mat-option *ngFor="let gRank of this.glRanks" [value]="gRank.id">{{gRank.display_name}}</mat-option>
+              <mat-option *ngFor="let glRank of this.glRanks" [value]="glRank.id">{{glRank.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.g_rank.errors">
               <mat-error *ngIf="af.g_rank.errors.required">Global Rank is required</mat-error>
@@ -85,7 +85,7 @@
           <mat-form-field>
             <mat-label>State Rank</mat-label>
             <mat-select matInput matTooltip="Oklahoma Natural Heritage Inventory Subnational Conservation Status Definitions" [matTooltipPosition]="this.position" [(ngModel)]="this.stRankDefault" formControlName="s_rank">
-              <mat-option *ngFor="let sRank of this.stRanks" [value]="sRank.id">{{sRank.display_name}}</mat-option>
+              <mat-option *ngFor="let stRank of this.stRanks" [value]="stRank.id">{{stRank.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.s_rank.errors">
               <mat-error *ngIf="af.s_rank.errors.required">State Rank is required</mat-error>
