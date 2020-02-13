@@ -111,7 +111,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Federal Status</mat-label>
-            <mat-select matInput matTooltip="Federal Endangered Species Act protection status, allowable values available via a dropdown list." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" formControlName="fed_status">
+            <mat-select matInput matTooltip="Federal Endangered Species Act protection status, allowable values available via a dropdown list." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" [(ngModel)]="this.noneOption" formControlName="fed_status">
               <mat-option *ngFor="let fedStatus of this.fedStatuses" [value]="fedStatus.id">{{fedStatus.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.fed_status.errors">
