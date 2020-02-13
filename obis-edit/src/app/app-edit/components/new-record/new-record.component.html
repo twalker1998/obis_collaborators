@@ -75,7 +75,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Global Rank</mat-label>
-            <mat-select matInput matTooltip="NatureServe's Global Conservation Status rank." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" formControlName="g_rank">
+            <mat-select matInput matTooltip="NatureServe's Global Conservation Status rank." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" [(ngModel)]="this.glRankDefault" formControlName="g_rank">
               <mat-option *ngFor="let glRank of this.glRanks" [value]="glRank.id">{{glRank.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.g_rank.errors">
