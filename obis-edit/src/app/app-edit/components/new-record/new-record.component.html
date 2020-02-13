@@ -93,7 +93,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Nativity</mat-label>
-            <mat-select matInput matTooltip="Indication of taxon's origin, allowable values available via a dropdown list." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" formControlName="nativity">
+            <mat-select matInput matTooltip="Indication of taxon's origin, allowable values available via a dropdown list." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" [(ngModel)]="this.noneOption" formControlName="nativity">
               <mat-option *ngFor="let nativity of this.nativities" [value]="nativity.id">{{nativity.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.nativity.errors">
