@@ -66,7 +66,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>IUCN Code</mat-label>
-            <mat-select matInput matTooltip="International Union for Conservation of Nature (IUCN) Red List rank, allowable values available via a dropdown list." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" formControlName="iucncode">
+            <mat-select matInput matTooltip="International Union for Conservation of Nature (IUCN) Red List rank, allowable values available via a dropdown list." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" [(ngModel)]="this.noneOption" formControlName="iucncode">
               <mat-option *ngFor="let iucnCode of this.iucnCodes" [value]="iucnCode.id">{{iucnCode.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.iucncode.errors">
