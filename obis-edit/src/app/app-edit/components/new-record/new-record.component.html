@@ -275,18 +275,17 @@
           </mat-card-header>
           <mat-card-content>
             <mat-form-field>
-              <input matInput placeholder="Vernacular Name" formControlName="vname">
+              <input matInput placeholder="Vernacular Name" matTooltip="Common name for the taxon. If more than one, create multiple records. Follow standard case conventions when applicable, e.g. Bald Eagle or post oak." [matTooltipPosition]="this.position" formControlName="vname">
               <div *ngIf="comtaxFormSubmitted && cf.vname.errors">
                 <mat-error *ngIf="cf.vname.errors.required">Vernacular name is required</mat-error>
               </div>
             </mat-form-field>
             <mat-form-field>
               <mat-label>Primary Name</mat-label>
-              <mat-select matInput formControlName="primary_name">
+              <mat-select matInput matTooltip="An indication whether the common name used is the primary name, based on appropriate sources. Though a taxon can have many common names, only one should be marked as the primary name. Acceptable values are true or false." [matTooltipPosition]="this.position" formControlName="primary_name">
                 <mat-option [value]="0">True</mat-option>
                 <mat-option [value]="1">False</mat-option>
               </mat-select>
-              <mat-hint>Is this the accepted vernacular name or a synonym?</mat-hint>
               <div *ngIf="comtaxFormSubmitted && cf.primary_name.errors">
                 <mat-error *ngIf="cf.primary_name.errors.required">Primary name is required</mat-error>
               </div>
