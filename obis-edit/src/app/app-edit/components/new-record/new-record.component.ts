@@ -61,7 +61,11 @@ export class NewRecordComponent implements OnInit {
     });
 
     this.dbService.getSwaps().subscribe(res => {
-      this.swaps = res.ok_swap;
+      this.swaps.push({id: 0, display_name: 'None'});
+
+      for (const swap of res.ok_swap) {
+        this.swaps.push(swap);
+      }
     });
 
     this.dbService.getRanks().subscribe(res => {
