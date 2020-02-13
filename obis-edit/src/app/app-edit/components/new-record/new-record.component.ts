@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { TooltipPosition } from '@angular/material/tooltip';
 
 import { NewFamilyRecordComponent } from '../new-family-record/new-family-record.component';
 import { Option } from '../../../shared/models/php/option';
@@ -37,6 +38,9 @@ export class NewRecordComponent implements OnInit {
   stRanks: Array<Option> = new Array<Option>();
   fedStatuses: Array<Option> = new Array<Option>();
   stStatuses: Array<Option> = new Array<Option>();
+
+  // Testing for tooltips
+  position: TooltipPosition = 'above';
 
   constructor(private formBuilder: FormBuilder, private dbService: DbService,
               private acodeValidator: AcodeValidator, private familyValidator: FamilyValidator, public dialog: MatDialog) { }
