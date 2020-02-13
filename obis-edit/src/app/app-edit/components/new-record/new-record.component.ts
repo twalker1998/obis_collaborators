@@ -40,6 +40,7 @@ export class NewRecordComponent implements OnInit {
   stRankDefault: number;
   fedStatuses: Array<Option> = new Array<Option>();
   stStatuses: Array<Option> = new Array<Option>();
+  noneOption = 0;
 
   // Testing for tooltips
   position: TooltipPosition = 'above';
