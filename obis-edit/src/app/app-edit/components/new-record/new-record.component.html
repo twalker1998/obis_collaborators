@@ -120,7 +120,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>State Status</mat-label>
-            <mat-select matInput matTooltip="State protection status, allowable values available via a dropdown list." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" formControlName="st_status">
+            <mat-select matInput matTooltip="State protection status, allowable values available via a dropdown list." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" [(ngModel)]="this.noneOption" formControlName="st_status">
               <mat-option *ngFor="let stStatus of this.stStatuses" [value]="stStatus.id">{{stStatus.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.st_status.errors">
