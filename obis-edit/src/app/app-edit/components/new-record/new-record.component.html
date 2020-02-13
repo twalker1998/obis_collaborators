@@ -7,7 +7,7 @@
         </mat-card-header>
         <mat-card-content>
           <mat-form-field>
-            <input matInput placeholder="acode" formControlName="acode">
+            <input matInput matTooltip="Unique code for the taxon. For plants, use the TSN (if available). For animals, use the first letter of the taxonomic group to which it belogs (e.g. birds (B), fish (F), invertebrates (I), or mammals (M)), followed by a hypen, then the first two letters of the genus and species. For instance, Grus americana is B-GRAM and Ovis canadensis is M-OVCA. For a subspecies, such as Agkistrodon contortrix contortrix, also include the first letter of the subspecies, e.g. H-AGCOC. If an acode is already in use, such as F-CYCA, add a suquential number to the ending, e.g. F-CYCA2. Codes, except TSN, should be all upper case." [matTooltipPosition]="this.position" placeholder="acode" formControlName="acode">
             <div *ngIf="recordSubmitted && af.acode.errors">
               <mat-error *ngIf="af.acode.errors.required">acode is required</mat-error>
             </div>
