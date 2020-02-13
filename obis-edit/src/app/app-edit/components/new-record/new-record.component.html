@@ -84,7 +84,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>State Rank</mat-label>
-            <mat-select matInput matTooltip="Oklahoma Natural Heritage Inventory Subnational Conservation Status Definitions" [matTooltipPosition]="this.position" formControlName="s_rank">
+            <mat-select matInput matTooltip="Oklahoma Natural Heritage Inventory Subnational Conservation Status Definitions" [matTooltipPosition]="this.position" [(ngModel)]="this.stRankDefault" formControlName="s_rank">
               <mat-option *ngFor="let sRank of this.stRanks" [value]="sRank.id">{{sRank.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.s_rank.errors">
