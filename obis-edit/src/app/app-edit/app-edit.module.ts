@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -27,7 +28,8 @@ import { FamilyValidator } from './validators/family-validator';
   ], imports: [
     CommonModule,
     SharedModule,
-    NgbModule
+    NgbModule,
+    NgxMatSelectSearchModule
   ], exports: [
     EditMainComponent
   ], entryComponents: [
