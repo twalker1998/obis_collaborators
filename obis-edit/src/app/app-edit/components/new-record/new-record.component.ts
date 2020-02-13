@@ -89,8 +89,17 @@ export class NewRecordComponent implements OnInit {
     });
 
     this.dbService.getStatuses().subscribe(res => {
-      this.fedStatuses = res.fed_statuses;
-      this.stStatuses = res.st_statuses;
+      this.fedStatuses.push({id: 0, display_name: 'None'});
+
+      for (const fedStatus of res.fed_statuses) {
+        this.fedStatuses.push(fedStatus);
+      }
+
+      this.stStatuses.push({id: 0, display_name: 'None'});
+
+      for (const stStatus of res.st_statuses) {
+        this.stStatuses.push(stStatus);
+      }
     });
 
     this.acctaxForm = this.formBuilder.group({
