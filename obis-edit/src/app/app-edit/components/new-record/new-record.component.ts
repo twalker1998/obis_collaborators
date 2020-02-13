@@ -59,6 +59,8 @@ export class NewRecordComponent implements OnInit {
     });
 
     this.dbService.getNativities().subscribe(res => {
+      this.nativities.push({id: 0, display_name: 'None'});
+
       for (const nativity of res.nativities) {
         this.nativities.push(nativity);
       }
