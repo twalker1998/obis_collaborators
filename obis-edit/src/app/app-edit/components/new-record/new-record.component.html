@@ -75,8 +75,9 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Global Rank</mat-label>
-            <mat-select matInput matTooltip="NatureServe's Global Conservation Status rank." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" [(ngModel)]="this.glRankDefault" formControlName="g_rank">
-              <mat-option *ngFor="let glRank of this.glRanks" [value]="glRank.id">{{glRank.display_name}}</mat-option>
+            <mat-select matInput matTooltip="NatureServe's Global Conservation Status rank." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" [(ngModel)]="this.glRankDefault" formControlName="g_rank" #glSelect>
+              <mat-option><ngx-mat-select-search [formControl]="this.glRankFilter" placeholderLabel="Search" noEntriesFoundLabel="No Global Ranks Found"></ngx-mat-select-search></mat-option>
+              <mat-option *ngFor="let glRank of this.filteredGlRanks | async" [value]="glRank.id">{{glRank.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.g_rank.errors">
               <mat-error *ngIf="af.g_rank.errors.required">Global Rank is required</mat-error>

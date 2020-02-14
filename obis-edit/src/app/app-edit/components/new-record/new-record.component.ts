@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSelect } from '@angular/material/select';
 import { TooltipPosition } from '@angular/material/tooltip';
+
+import { ReplaySubject, Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
 
 import { NewFamilyRecordComponent } from '../new-family-record/new-family-record.component';
 import { Option } from '../../../shared/models/php/option';
@@ -15,7 +19,7 @@ import { FamilyValidator } from '../../validators/family-validator';
   templateUrl: './new-record.component.html',
   styleUrls: ['./new-record.component.css']
 })
-export class NewRecordComponent implements OnInit {
+export class NewRecordComponent implements OnInit, OnDestroy {
   acode: string;
   acctaxForm: FormGroup;
   comtaxForm: FormGroup;
@@ -34,12 +38,17 @@ export class NewRecordComponent implements OnInit {
   iucnCodes: Array<Option> = new Array<Option>();
   nativities: Array<Option> = new Array<Option>();
   swaps: Array<Option> = new Array<Option>();
+
   glRanks: Array<Option> = new Array<Option>();
   glRankDefault: number;
   glRankFilter: FormControl = new FormControl();
+  filteredGlRanks: ReplaySubject<Option[]> = new ReplaySubject<Option[]>(1);
+  private glOnDestroy = new Subject<void>();
+  @ViewChild('glSelect', {static: true}) glSelect: MatSelect;
+
   stRanks: Array<Option> = new Array<Option>();
   stRankDefault: number;
-  stRankFilter: FormControl = new FormControl();
+
   fedStatuses: Array<Option> = new Array<Option>();
   stStatuses: Array<Option> = new Array<Option>();
   noneOption = 0;
@@ -93,6 +102,12 @@ export class NewRecordComponent implements OnInit {
           break;
         }
       }
+
+      this.filteredGlRanks.next(this.glRanks);
+
+      this.glRankFilter.valueChanges.pipe(takeUntil(this.glOnDestroy)).subscribe(() => {
+        this.filterGlRanks();
+      });
     });
 
     this.dbService.getStatuses().subscribe(res => {
@@ -160,9 +175,31 @@ export class NewRecordComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    this.glOnDestroy.next();
+    this.glOnDestroy.complete();
+  }
+
   get af() { return this.acctaxForm.controls; }
   get cf() { return this.comtaxForm.controls; }
   get sf() { return this.syntaxForm.controls; }
+
+  protected filterGlRanks() {
+    if (!this.glRanks) {
+      return;
+    }
+
+    const search = this.glRankFilter.value;
+
+    if (!search) {
+      this.filteredGlRanks.next(this.glRanks);
+      return;
+    }
+
+    this.filteredGlRanks.next(
+      this.glRanks.filter(glRank => glRank.display_name.indexOf(search) > -1)
+    );
+  }
 
   addSynonym() {
     this.syntaxFormSubmitted = true;
