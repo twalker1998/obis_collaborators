@@ -59,7 +59,7 @@ export class NewRecordComponent implements OnInit, OnDestroy {
 
   // Testing for tooltips
   position: TooltipPosition = 'above';
-  showDelay = '2000';
+  showDelay = '1000';
 
   constructor(private formBuilder: FormBuilder, private dbService: DbService,
               private acodeValidator: AcodeValidator, private familyValidator: FamilyValidator, public dialog: MatDialog) { }
