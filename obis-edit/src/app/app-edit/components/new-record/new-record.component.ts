@@ -112,6 +112,12 @@ export class NewRecordComponent implements OnInit, OnDestroy {
       this.glRankFilter.valueChanges.pipe(takeUntil(this.glOnDestroy)).subscribe(() => {
         this.filterGlRanks();
       });
+
+      this.filteredStRanks.next(this.stRanks);
+
+      this.stRankFilter.valueChanges.pipe(takeUntil(this.stOnDestroy)).subscribe(() => {
+        this.filterStRanks();
+      })
     });
 
     this.dbService.getStatuses().subscribe(res => {
@@ -182,6 +188,9 @@ export class NewRecordComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.glOnDestroy.next();
     this.glOnDestroy.complete();
+
+    this.stOnDestroy.next();
+    this.stOnDestroy.complete();
   }
 
   get af() { return this.acctaxForm.controls; }
@@ -202,6 +211,23 @@ export class NewRecordComponent implements OnInit, OnDestroy {
 
     this.filteredGlRanks.next(
       this.glRanks.filter(glRank => glRank.display_name.indexOf(search) > -1)
+    );
+  }
+
+  protected filterStRanks() {
+    if(!this.stRanks) {
+      return;
+    }
+
+    const search = this.stRankFilter.value;
+
+    if (!search) {
+      this.filteredStRanks.next(this.stRanks);
+      return;
+    }
+
+    this.filteredStRanks.next(
+      this.stRanks.filter(stRank => stRank.display_name.indexOf(search) > -1)
     );
   }
 
