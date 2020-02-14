@@ -202,15 +202,17 @@ export class NewRecordComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const search = this.glRankFilter.value;
+    let search = this.glRankFilter.value;
 
     if (!search) {
       this.filteredGlRanks.next(this.glRanks);
       return;
+    } else {
+      search = search.toUpperCase();
     }
 
     this.filteredGlRanks.next(
-      this.glRanks.filter(glRank => glRank.display_name.indexOf(search) > -1)
+      this.glRanks.filter(glRank => glRank.display_name.toUpperCase().indexOf(search) > -1)
     );
   }
 
@@ -219,15 +221,17 @@ export class NewRecordComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const search = this.stRankFilter.value;
+    let search = this.stRankFilter.value;
 
     if (!search) {
       this.filteredStRanks.next(this.stRanks);
       return;
+    } else {
+      search = search.toUpperCase();
     }
 
     this.filteredStRanks.next(
-      this.stRanks.filter(stRank => stRank.display_name.indexOf(search) > -1)
+      this.stRanks.filter(stRank => stRank.display_name.toUpperCase().indexOf(search) > -1)
     );
   }
 
