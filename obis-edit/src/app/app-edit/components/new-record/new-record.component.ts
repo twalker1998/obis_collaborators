@@ -5,7 +5,7 @@ import { MatSelect } from '@angular/material/select';
 import { TooltipPosition } from '@angular/material/tooltip';
 
 import { ReplaySubject, Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 import { NewFamilyRecordComponent } from '../new-family-record/new-family-record.component';
 import { Option } from '../../../shared/models/php/option';
