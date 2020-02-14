@@ -44,10 +44,14 @@ export class NewRecordComponent implements OnInit, OnDestroy {
   glRankFilter: FormControl = new FormControl();
   filteredGlRanks: ReplaySubject<Option[]> = new ReplaySubject<Option[]>(1);
   private glOnDestroy = new Subject<void>();
-  @ViewChild('glSelect', {static: true}) glSelect: MatSelect;
+  @ViewChild('glSelect', { static: true }) glSelect: MatSelect;
 
   stRanks: Array<Option> = new Array<Option>();
   stRankDefault: number;
+  stRankFilter: FormControl = new FormControl();
+  filteredStRanks: ReplaySubject<Option[]> = new ReplaySubject<Option[]>(1);
+  private stOnDestroy = new Subject<void>();
+  @ViewChild('stSelect', { static: true }) stSelect: MatSelect;
 
   fedStatuses: Array<Option> = new Array<Option>();
   stStatuses: Array<Option> = new Array<Option>();
