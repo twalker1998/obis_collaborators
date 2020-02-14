@@ -66,7 +66,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>IUCN Code</mat-label>
-            <mat-select matInput matTooltip="International Union for Conservation of Nature (IUCN) Red List rank, allowable values available via a dropdown list." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" formControlName="iucncode">
+            <mat-select matInput matTooltip="International Union for Conservation of Nature (IUCN) Red List rank, allowable values available via a dropdown list." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" [(ngModel)]="this.noneOption" formControlName="iucncode">
               <mat-option *ngFor="let iucnCode of this.iucnCodes" [value]="iucnCode.id">{{iucnCode.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.iucncode.errors">
@@ -75,8 +75,9 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Global Rank</mat-label>
-            <mat-select matInput matTooltip="NatureServe's Global Conservation Status rank." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" formControlName="g_rank">
-              <mat-option *ngFor="let glRank of this.glRanks" [value]="glRank.id">{{glRank.display_name}}</mat-option>
+            <mat-select matInput matTooltip="NatureServe's Global Conservation Status rank." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" [(ngModel)]="this.glRankDefault" formControlName="g_rank" #glSelect>
+              <mat-option><ngx-mat-select-search [formControl]="this.glRankFilter" placeholderLabel="Search" noEntriesFoundLabel="No Matching Global Rank Found"></ngx-mat-select-search></mat-option>
+              <mat-option *ngFor="let glRank of this.filteredGlRanks | async" [value]="glRank.id">{{glRank.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.g_rank.errors">
               <mat-error *ngIf="af.g_rank.errors.required">Global Rank is required</mat-error>
@@ -84,8 +85,9 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>State Rank</mat-label>
-            <mat-select matInput matTooltip="Oklahoma Natural Heritage Inventory Subnational Conservation Status Definitions" [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" [(ngModel)]="this.stRankDefault" formControlName="s_rank">
-              <mat-option *ngFor="let stRank of this.stRanks" [value]="stRank.id">{{stRank.display_name}}</mat-option>
+            <mat-select matInput matTooltip="Oklahoma Natural Heritage Inventory Subnational Conservation Status Definitions" [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" [(ngModel)]="this.stRankDefault" formControlName="s_rank" #stSelect>
+              <mat-option><ngx-mat-select-search [formControl]="this.stRankFilter" placeholderLabel="Search" noEntriesFoundLabel="No Matching State Rank Found"></ngx-mat-select-search></mat-option>
+              <mat-option *ngFor="let stRank of this.filteredStRanks | async" [value]="stRank.id">{{stRank.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.s_rank.errors">
               <mat-error *ngIf="af.s_rank.errors.required">State Rank is required</mat-error>
@@ -93,7 +95,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Nativity</mat-label>
-            <mat-select matInput matTooltip="Indication of taxon's origin, allowable values available via a dropdown list." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" formControlName="nativity">
+            <mat-select matInput matTooltip="Indication of taxon's origin, allowable values available via a dropdown list." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" [(ngModel)]="this.noneOption" formControlName="nativity">
               <mat-option *ngFor="let nativity of this.nativities" [value]="nativity.id">{{nativity.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.nativity.errors">
@@ -111,7 +113,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Federal Status</mat-label>
-            <mat-select matInput matTooltip="Federal Endangered Species Act protection status, allowable values available via a dropdown list." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" formControlName="fed_status">
+            <mat-select matInput matTooltip="Federal Endangered Species Act protection status, allowable values available via a dropdown list." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" [(ngModel)]="this.noneOption" formControlName="fed_status">
               <mat-option *ngFor="let fedStatus of this.fedStatuses" [value]="fedStatus.id">{{fedStatus.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.fed_status.errors">
@@ -120,7 +122,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>State Status</mat-label>
-            <mat-select matInput matTooltip="State protection status, allowable values available via a dropdown list." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" formControlName="st_status">
+            <mat-select matInput matTooltip="State protection status, allowable values available via a dropdown list." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" [(ngModel)]="this.noneOption" formControlName="st_status">
               <mat-option *ngFor="let stStatus of this.stStatuses" [value]="stStatus.id">{{stStatus.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.st_status.errors">
@@ -129,7 +131,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>OK Swap</mat-label>
-            <mat-select matInput matTooltip="State Wildlife Action Plan tier, allowable values available via a dropdown list." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" formControlName="swap">
+            <mat-select matInput matTooltip="State Wildlife Action Plan tier, allowable values available via a dropdown list." [matTooltipPosition]="this.position" [matTooltipShowDelay]="this.showDelay" [(ngModel)]="this.noneOption" formControlName="swap">
               <mat-option *ngFor="let swap of this.swaps" [value]="swap.id">{{swap.display_name}}</mat-option>
             </mat-select>
             <div *ngIf="recordSubmitted && af.swap.errors">
