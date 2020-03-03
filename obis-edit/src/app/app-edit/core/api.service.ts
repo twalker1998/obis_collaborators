@@ -7,6 +7,7 @@ import { Acctax } from '../../shared/models/acctax';
 import { ApiResponse } from '../../shared/models/api-response';
 import { FedStatus } from '../../shared/models/fed-status';
 import { Hightax } from '../../shared/models/hightax';
+import { Rank } from '../../shared/models/rank';
 import { HightaxApi } from '../../shared/models/php/hightax-api';
 import { StateStatus } from '../../shared/models/st-status';
 import { Swap } from '../../shared/models/swap';
@@ -34,6 +35,11 @@ export class ApiService {
       );
     } else if (type === 'hightax') {
       return this.httpClient.get<Hightax>(url).pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+    } else if (type === 'rank') {
+      return this.httpClient.get<Rank>(url).pipe(
         retry(1),
         catchError(this.handleError)
       );
@@ -68,6 +74,11 @@ export class ApiService {
       ).toPromise();
     } else if (type === 'hightax') {
       return this.httpClient.get<Hightax>(url).pipe(
+        retry(1),
+        catchError(this.handleError)
+      ).toPromise();
+    } else if (type === 'rank') {
+      return this.httpClient.get<Rank>(url).pipe(
         retry(1),
         catchError(this.handleError)
       ).toPromise();
